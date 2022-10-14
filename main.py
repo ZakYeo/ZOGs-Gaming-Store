@@ -2,7 +2,8 @@ from flask import Flask, redirect, url_for, request, render_template, session, f
 from flask_bootstrap import Bootstrap5
 import os
 app = Flask(__name__, template_folder="templates", static_folder="static")
-
+app.secret_key = os.urandom(12)
+Bootstrap5(app)
 
 @app.route("/")
 def home():
@@ -52,6 +53,4 @@ def is_logged_in():
 
 
 if __name__ == '__main__':
-    app.secret_key = os.urandom(12)
-    Bootstrap5(app)
     app.run(debug=True)
