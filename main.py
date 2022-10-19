@@ -11,13 +11,28 @@ app.secret_key = os.urandom(12)
 Bootstrap5(app)
 
 
+@app.route("/store")
+def store():
+    query = datastore_client.query(kind="Item")
+    items = list(query.fetch())
+    if(is_logged_in()):
+        username = session["logged_in"]
+    else:
+        username = ""
+
+    return render_template("main_store_page.html", name=username, items=items)
+
+
 @app.route("/")
 def home():
-    if not session.get("logged_in"):
-        return render_template('login.html')
-    else:
-        return "You're logged in"
+    return redirect(url_for("store"))
 
+
+# TODO
+#   pass username through store
+#    Hello "username" Message
+#   "Logout" turns to "Login" and vice versa
+#    "Logout" / "Login" button functionality
 
 @app.route('/success/<name>')
 def success(name):
@@ -36,20 +51,21 @@ def login():
         password = request.form['password']
         if(user == "admin" and password == "admin"):
             session["logged_in"] = user
-            return redirect(url_for('success', name=user))
+            return redirect(url_for("store"))
         else:
-            return home()
+            return render_template('login.html')
     else:
         if(is_logged_in()):
-            return redirect(url_for('success', name=session["logged_in"]))
+            return redirect(url_for("store"))
         else:
             return render_template('login.html')
 
 
 @app.route("/logout")
 def logout():
-    session['logged_in'] = None
-    return home()
+    if(is_logged_in()):
+        del session['logged_in']
+    return redirect(url_for("store"))
 
 
 def is_logged_in():

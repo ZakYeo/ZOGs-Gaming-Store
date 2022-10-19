@@ -11,11 +11,15 @@
           <div class="d-flex">
             <a class="navbar-brand navbartext" href="#">♚</a>
             <div class="d-flex flex-row">
-              <a class="nav-link active navbartext" aria-current="page" href="#">Home</a>
-              <a class="nav-link navbartext" href="#">Logout</a>
+              {% if name == "" : %}
+                <a class="nav-link navbartext" href="{{ url_for('login') }}">Login</a>
+              {% else %}
+                <a class="nav-link navbartext" href="{{ url_for('logout') }}">Logout</a>
+              {% endif %}
+              
             </div>
           </div>
-
+          <h1>{{name}}</h1>
 
             <div class="">
             <input class="" type="search" placeholder="Search" aria-label="Search">
@@ -32,7 +36,7 @@
             {% for item in items %}
             <div class="col gamecol">
               <div class="p-1 border bg-light">
-                <img src='{{item["Image"]}}' alt='{{item["Image"]}}''>
+                <img src='{{item["Image"]}}' alt='{{item["Name"]}}''>
                 <p>{{item["Name"]}}</p>
               </div>
             </div>
