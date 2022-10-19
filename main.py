@@ -1,9 +1,15 @@
 from flask import Flask, redirect, url_for, request, render_template, session, flash
 from flask_bootstrap import Bootstrap5
 import os
+from datetime import datetime
+from google.cloud import datastore
+
+datastore_client = datastore.Client(project="ad-2021-03")
+
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = os.urandom(12)
 Bootstrap5(app)
+
 
 @app.route("/")
 def home():
@@ -16,7 +22,9 @@ def home():
 @app.route('/success/<name>')
 def success(name):
     if(is_logged_in()):
-        return render_template("logged_in.html", name=name)
+        query = datastore_client.query(kind="Item")
+        items = list(query.fetch())
+        return render_template("logged_in.html", name=name, items=items)
     else:
         return home()
 
