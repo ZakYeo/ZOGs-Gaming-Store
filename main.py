@@ -28,22 +28,6 @@ def home():
     return redirect(url_for("store"))
 
 
-# TODO
-#   pass username through store
-#    Hello "username" Message
-#   "Logout" turns to "Login" and vice versa
-#    "Logout" / "Login" button functionality
-
-@app.route('/success/<name>')
-def success(name):
-    if(is_logged_in()):
-        query = datastore_client.query(kind="Item")
-        items = list(query.fetch())
-        return render_template("logged_in.html", name=name, items=items)
-    else:
-        return home()
-
-
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
