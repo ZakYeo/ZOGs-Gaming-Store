@@ -1,13 +1,12 @@
-from flask import Flask, redirect, url_for, request, render_template, session, flash
+from flask import Flask, redirect, url_for, request, render_template, session
 from flask_bootstrap import Bootstrap5
-import os
-from datetime import datetime
+from os import urandom
 from google.cloud import datastore
 
 datastore_client = datastore.Client(project="ad-2021-03")
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
-app.secret_key = os.urandom(12)
+app.secret_key = urandom(12)
 Bootstrap5(app)
 
 
