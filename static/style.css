@@ -91,6 +91,11 @@ Code from https://pythonspot.com/login-authentication-with-flask/
 }
 
 .game {
-    width: 150;
-    height: 200;
+    max-height: 210;
+    max-width: 460;
+}
+
+.gamecol {
+    min-width: 480;
+    min-height: 210;
 }
