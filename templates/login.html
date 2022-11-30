@@ -1,5 +1,11 @@
 <html>
     <head>
+        <script src="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.css">
+        <!-- [END gae_python3_auth_include_firebaseui] -->
+        <!-- [END gae_python38_auth_include_firebaseui] -->
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+
         <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
     </head>
     <body class="loginbody">{% block body %}
@@ -13,16 +19,110 @@
                     </div>
                     <div class="login-form">
                         <div class="control-group">
-                            <input type="text" class="login-field" value="" placeholder="username" name="username">
+                            <input id="email" type="text" class="login-field" value="" placeholder="email" name="username">
                             <label class="login-field-icon fui-user" for="login-name"></label></div>
                             <div class="control-group">
-                                <input type="password" class="login-field" value="" placeholder="password" name="password">
+                                <input id="password" type="password" class="login-field" value="" placeholder="password" name="password">
                                 <label class="login-field-icon fui-lock" for="login-pass"></label></div>
-                                <input type="submit" value="Log in" class="btn btn-primary btn-large btn-block">
+                                <input id="login-btn" type="submit" value="Log In" class="btn btn-primary btn-large btn-block">
+                            </div>
+                            <input id="signup-btn" type="submit" value="Sign Up" class="btn btn-primary btn-large btn-block">
+                            <div id="firebaseui-auth-container"></div>
                             </div>
                         </div>
                     </div>
                 </form>
         {% endblock %}
     </body>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-auth.js"></script>
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+    https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-analytics.js"></script>
+    <script>
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+    apiKey: "AIzaSyAopZxjnk3TnQMPg9NUouUvC6aIsvtDCyo",
+    authDomain: "ad-2021-03.firebaseapp.com",
+    projectId: "ad-2021-03",
+    storageBucket: "ad-2021-03.appspot.com",
+    messagingSenderId: "243759511961",
+    appId: "1:243759511961:web:8e19eab1cbf743c9d27b08",
+    measurementId: "G-FKJT5126NC"
+    };
+    // FirebaseUI config.
+ var uiConfig = {
+ signInSuccessUrl: '/',
+ signInOptions: [
+ // Comment out any lines corresponding to providers you did not check in
+ // the Firebase console.
+ firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+ firebase.auth.EmailAuthProvider.PROVIDER_ID,
+ //firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+ //firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+ //firebase.auth.GithubAuthProvider.PROVIDER_ID,
+ //firebase.auth.PhoneAuthProvider.PROVIDER_ID
+ ],
+ // Terms of service url.
+ tosUrl: '<your-tos-url>'
+ };
+
+    // Initialize Firebase
+   // Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+const auth = firebase.auth();
+console.log(firebase);
+
+// https://dev.to/maasak/sign-up-login-logout-users-with-firebase-authentication-3oa9
+const signupBtn = document.querySelector('#signup-btn');
+    signupBtn.addEventListener('click', e => {
+    e.preventDefault();
+
+    const email = document.querySelector('#email').value;
+    const password = document.querySelector('#password').value;
+
+    auth.createUserWithEmailAndPassword(email, password).then(cred => {
+    console.log('User signed up!');
+  });
+});
+
+
+const loginBtn = document.querySelector('#login-btn');
+  loginBtn.addEventListener('click', e => {
+
+  const email = document.querySelector('#email').value;
+  const password = document.querySelector('#password').value;
+
+  auth.signInWithEmailAndPassword(email, password)
+    .then(cred => {
+      console.log('Logged in user!');
+    })
+    .catch(error => {
+      console.log(error.message);
+    })
+});
+
+auth.onAuthStateChanged(user => {
+  if (user) {
+    console.log(user.email + " is logged in!");
+    user.getIdToken().then(function (token) {
+        // Add the token to the browser's cookies. The server will then be
+        // able to verify the token against the API.
+        document.cookie = "token=" + token;
+    }); 
+  } else {
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // Show the Firebase login button.
+    ui.start('#firebaseui-auth-container', uiConfig); 
+    console.log('User is logged out!');
+    document.cookie = "token="; 
+  }
+});
+</script>
 </html>
