@@ -63,8 +63,12 @@ def check_firebase_login():
     return None
 
 
-def get_all_games():
+def get_games(key=None, value=None):
+
     url = "https://europe-west1-ad-2021-03.cloudfunctions.net/get-all-games"
+
+    if(key and value):
+        url += f"?key={key}&value={value}"
 
     resp = requests.get(url)
 
