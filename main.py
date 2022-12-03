@@ -1,21 +1,16 @@
-from flask import Flask, redirect, url_for, request, render_template, session
+from flask import Flask, redirect, url_for, request, render_template
 from flask_bootstrap import Bootstrap5
 from os import urandom
 from google.cloud import datastore
 import requests
-from pymongo import MongoClient
-from google.auth.transport import requests as grequests
 
-firebase_request_adapter = grequests.Request()
+
 datastore_client = datastore.Client(project="ad-2021-03")
 BASE_URL = "https://europe-west1-ad-2021-03.cloudfunctions.net"
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = urandom(12)
 Bootstrap5(app)
-
-cluster = MongoClient(
-    "mongodb+srv://ZakAdvancedDev:eMdjKMHKfsawLrT4@cluster0.9xwlxzr.mongodb.net/?retryWrites=true&w=majority")
 
 
 @app.route("/store")
