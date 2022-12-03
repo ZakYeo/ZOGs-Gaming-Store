@@ -41,7 +41,10 @@ def check_firebase_login(token=""):
 
     resp = requests.get(url)
 
-    return resp.json()
+    if resp.status_code == 200:
+        return resp.json()
+    else:
+        return None
 
 
 def get_games(key=None, value=None):
