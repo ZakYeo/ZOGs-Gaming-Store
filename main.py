@@ -17,6 +17,8 @@ Bootstrap5(app)
 def store():
     games = get_games()
     items = list(games.values())
+    # sort games alphabetically by name
+    items = sorted(items, key=lambda item: item["name"])
     return render_template("main_store_page.html", items=items)
 
 
