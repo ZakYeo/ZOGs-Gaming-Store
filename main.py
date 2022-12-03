@@ -18,11 +18,10 @@ cluster = MongoClient(
     "mongodb+srv://ZakAdvancedDev:eMdjKMHKfsawLrT4@cluster0.9xwlxzr.mongodb.net/?retryWrites=true&w=majority")
 
 
-@app.route("/store", defaults={'email': "Please Log In"})
+@app.route("/store")
 def store():
-    query = datastore_client.query(kind="Item")
-    items = list(query.fetch())
-
+    games = get_games()
+    items = list(games.values())
     return render_template("main_store_page.html", items=items)
 
 
