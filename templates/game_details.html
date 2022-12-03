@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Online Gaming Store">
+    <meta name="author" content="Zak Yeomanson">
+    {{ bootstrap.load_js() }}
+    {{ bootstrap.load_css() }}
+
+    <title>Zak's Online Gaming Store [ZOGS]</title>
+
+
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    <script src="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.js"></script>
+        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.css">
+  </head>
+<!-- NAVBAR
+================================================== -->
+  <body>
+    <body class="mainbody">{% block body %}
+      <nav class="navbar navbar-main">
+        <div class="container-fluid">
+          <div class="d-flex">
+            <a class="navbar-brand navbartext" href="#">♚</a>
+            <div class="d-flex flex-row">
+                <a class="nav-link navbartext" id="login-btn" href="{{ url_for('login') }}">Login</a>
+                <a class="nav-link navbartext" id="logout-btn">Logout</a>
+            </div>
+          </div>
+          <h1 id="login-name">Please Log In</h1>
+
+            <div class="">
+            <input class="" type="search" placeholder="Search" aria-label="Search">
+            <button type="submit">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </nav>
+    <!-- Marketing messaging and featurettes
+    ================================================== -->
+    <!-- Wrap the rest of the page in another container to center all the content. -->
+
+    <div class="container">
+        <img class="img-circle img" src="{{game['image']}}" alt="{{game['name']}}">
+        <p>{{game["name"]}}</p>
+        <p>{{game["price"]}}</p>
+
+    </div>{% endblock %}
+  </body>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-auth.js"></script>
+<!-- TODO: Add SDKs for Firebase products that you want to use
+https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-analytics.js"></script>
+<script>
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+apiKey: "AIzaSyAopZxjnk3TnQMPg9NUouUvC6aIsvtDCyo",
+authDomain: "ad-2021-03.firebaseapp.com",
+projectId: "ad-2021-03",
+storageBucket: "ad-2021-03.appspot.com",
+messagingSenderId: "243759511961",
+appId: "1:243759511961:web:8e19eab1cbf743c9d27b08",
+measurementId: "G-FKJT5126NC"
+};
+
+// Initialize Firebase
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+firebase.analytics();
+const auth = firebase.auth();
+console.log(firebase);
+
+const logoutBtn = document.querySelector('#logout-btn');
+logoutBtn.addEventListener('click', e => {
+e.preventDefault();
+auth.signOut();
+console.log('User signed out!');
+})
+
+auth.onAuthStateChanged(user => {
+if (user) {
+console.log(user.email + " is logged in!");
+document.querySelector('#logout-btn').hidden = false;
+document.querySelector('#login-btn').hidden = true;
+document.getElementById('login-name').textContent = user.email;
+user.getIdToken().then(function (token) {
+        // Add the token to the browser's cookies. The server will then be
+        // able to verify the token against the API.
+        document.cookie = "token=" + token;
+    });
+
+
+} else {
+console.log('User is logged out!');
+document.querySelector('#logout-btn').hidden = true;
+document.querySelector('#login-btn').hidden = false;
+document.getElementById('login-name').textContent = "Please Log In";
+document.cookie = "token="; 
+console.log(document.cookie);
+}
+});
+</script>
+</html>

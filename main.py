@@ -13,21 +13,32 @@ app.secret_key = urandom(12)
 Bootstrap5(app)
 
 
-@app.route("/store")
-def store():
-    games = get_games()
-    items = list(games.values())
-    # sort games alphabetically by name
-    items = sorted(items, key=lambda item: item["name"])
-    return render_template("main_store_page.html", items=items)
+@app.route("/store", defaults={"game": ""})
+@app.route("/store/", defaults={"game": ""})
+@app.route("/store/<game>")
+def store(game):
+
+    if not game:
+        games = get_games()
+        items = list(games.values())
+        # sort games alphabetically by name
+        items = sorted(items, key=lambda item: item["name"])
+        return render_template("main_store_page.html", items=items)
+    else:
+        try:
+            game = get_games("id_", int(game))["1"]  # Get specific game
+        except ValueError and KeyError:
+            return redirect(url_for("store"))
+
+        return render_template("game_details.html", game=game)
 
 
-@app.route("/")
+@ app.route("/")
 def home():
     return redirect(url_for("store"))
 
 
-@app.route('/login', methods=['POST', 'GET'])
+@ app.route('/login', methods=['POST', 'GET'])
 def login():
 
     claims = check_firebase_login(request.cookies.get("token"))
