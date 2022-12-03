@@ -10,6 +10,7 @@ import google.oauth2.id_token
 
 firebase_request_adapter = grequests.Request()
 datastore_client = datastore.Client(project="ad-2021-03")
+BASE_URL = "https://europe-west1-ad-2021-03.cloudfunctions.net"
 
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = urandom(12)
@@ -36,7 +37,7 @@ def home():
 @app.route('/login', methods=['POST', 'GET'])
 def login():
 
-    claims = check_firebase_login()
+    claims = check_firebase_login(request.cookies.get("token"))
     if(claims):  # User is logged in
         email = claims["email"]
         return redirect(url_for("store", email=email))
@@ -44,28 +45,17 @@ def login():
         return render_template('login.html')
 
 
-def check_firebase_login():
-    id_token = request.cookies.get("token")
-    if id_token:
-        try:
-            # Verify the token against the Firebase Auth API. This example
-            # verifies the token on each page load
-            claims = google.oauth2.id_token.verify_firebase_token(
-                id_token, firebase_request_adapter)
+def check_firebase_login(token=""):
+    url = f"{BASE_URL}/verify-firebase-token?token={token}"
 
-            return claims
+    resp = requests.get(url)
 
-        except Exception:
-            # This will be raised if the token is expired or any other
-            # verification checks fail.
-            pass  # Continue, return None later
-
-    return None
+    return resp.json()
 
 
 def get_games(key=None, value=None):
 
-    url = "https://europe-west1-ad-2021-03.cloudfunctions.net/get-all-games"
+    url = f"{BASE_URL}/get-all-games"
 
     if(key and value):
         url += f"?key={key}&value={value}"
