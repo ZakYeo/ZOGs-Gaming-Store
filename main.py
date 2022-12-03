@@ -6,8 +6,6 @@ import requests
 from pymongo import MongoClient
 from google.auth.transport import requests as grequests
 
-import google.oauth2.id_token
-
 firebase_request_adapter = grequests.Request()
 datastore_client = datastore.Client(project="ad-2021-03")
 BASE_URL = "https://europe-west1-ad-2021-03.cloudfunctions.net"
@@ -21,8 +19,7 @@ cluster = MongoClient(
 
 
 @app.route("/store", defaults={'email': "Please Log In"})
-@app.route('/store/<email>', methods=["GET", "POST"])
-def store(email):
+def store():
     query = datastore_client.query(kind="Item")
     items = list(query.fetch())
 
