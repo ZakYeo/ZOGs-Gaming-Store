@@ -43,8 +43,7 @@ def login():
 
     claims = check_firebase_login(request.cookies.get("token"))
     if(claims):  # User is logged in
-        email = claims["email"]
-        return redirect(url_for("store", email=email))
+        return redirect(url_for("store"))
     else:  # User is not logged in
         return render_template('login.html')
 
