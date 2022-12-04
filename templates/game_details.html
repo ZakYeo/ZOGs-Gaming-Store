@@ -1,58 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="Online Gaming Store">
-    <meta name="author" content="Zak Yeomanson">
+    <!-- Google Fots -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Remixicon Icon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Remixicon Icon -->
+    <!-- Bootstrap CSS -->
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    <title>[ZOGS]</title>
     {{ bootstrap.load_js() }}
     {{ bootstrap.load_css() }}
-
-    <title>Zak's Online Gaming Store [ZOGS]</title>
-
-
-    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
-    <script src="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.js"></script>
-        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.css">
   </head>
 <!-- NAVBAR
 ================================================== -->
-  <body>
-    <body class="mainbody">{% block body %}
-      <nav class="navbar navbar-main">
-        <div class="container-fluid">
-          <div class="d-flex">
-            <a class="navbar-brand navbartext" href="{{ url_for('store') }}">♚</a>
-          </div>
-          <h1 id="login-name">Please Log In</h1>
-
-          <div class="d-flex flex-row">
-            <a class="btn btnsmall" id="login-btn" href="{{ url_for('login') }}">Login</a>
-            <a class="btn btnsmall" id="logout-btn">Logout</a>
+  <body class="body">
+    {% block body %}
+    <!-- header -->
+    <header class="ds-header">
+      <div class="container" style="display: flex; flex-direction: row;">
+        <div class="ds-logo" style="padding-right: 5px">
+          <a href="{{ url_for('store') }}">Home</a>
         </div>
+          <div class="ds-logo">
+            <a href="{{ url_for('login') }}" id="login-btn">Login</a>
           </div>
-        </div>
-      </nav>
-    <!-- Marketing messaging and featurettes
-    ================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
-    <div>
-    <div class="imgtitlecontainer"></div>
-    <p class="title"><u>{{game["name"]}}</u></p>
-      <div class="imgcontainer">
-        <img class="singleimg" src="{{game['image']}}" alt="{{game['name']}}">
+          <div class="ds-logo" id="logout-btn">
+            <a href="">Logout</a>
+          </div>
       </div>
+      
     </div>
-      <div class="gamedetailscontainer">
-      <div class="details"> 
-        Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.
-        <div class="priceandbutton">
-        <p class="price">£{{game["price"]}}</p>
-        <p><a class="btn" style="width: 160%" href="" role="button">Buy</a></p>
+    </header>
+    <!-- header -->
+    <!-- banner -->
+    <section class="ds-banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-sm-12  col-md-6  col-lg-7  col-xl-7  col-xxl-7 ds-banner-left">
+              <h1 class="ds-banner-hed">
+                {{game['name']}}
+              </h1>
+
+          </div>
+          <div class="col-12 col-sm-12  col-md-6  col-lg-5  col-xl-5  col-xxl-5">
+            <figure>
+              <img src="{{game['image']}}">
+            </figure>
+          </div>
+        </div>
       </div>
+    </section>
+    <!-- banner -->
+    <section class="ds-resume-section">
+      <div class="container">
+          <div class="row">
+              <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
+                <h2 class="price">£{{game['price']}}</h2>
+              </div>
+              <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
+                <p>example description</p>
+                <a href="#" class="ds-download-button">Purchase Game<i class="ri-download-line"></i></a>
+              </div>
+          </div>
       </div>
+    </section>
+    
       
 
     </div></div>{% endblock %}
@@ -98,7 +118,6 @@ if (user) {
 console.log(user.email + " is logged in!");
 document.querySelector('#logout-btn').hidden = false;
 document.querySelector('#login-btn').hidden = true;
-document.getElementById('login-name').textContent = user.email;
 user.getIdToken().then(function (token) {
         // Add the token to the browser's cookies. The server will then be
         // able to verify the token against the API.
@@ -110,7 +129,6 @@ user.getIdToken().then(function (token) {
 console.log('User is logged out!');
 document.querySelector('#logout-btn').hidden = true;
 document.querySelector('#login-btn').hidden = false;
-document.getElementById('login-name').textContent = "Please Log In";
 document.cookie = "token=" + "; path=/";
 console.log(document.cookie);
 }

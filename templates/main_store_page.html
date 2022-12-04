@@ -1,140 +1,142 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <meta name="description" content="Online Gaming Store">
-    <meta name="author" content="Zak Yeomanson">
-    {{ bootstrap.load_js() }}
-    {{ bootstrap.load_css() }}
-
-    <title>Zak's Online Gaming Store [ZOGS]</title>
-
-
-    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    <!-- Google Fots -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <!-- Remixicon Icon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <!-- Remixicon Icon -->
+    <!-- Bootstrap CSS -->
     <script src="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.js"></script>
         <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.css">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+    <title>[ZOGS]</title>
+    {{ bootstrap.load_js() }}
+    {{ bootstrap.load_css() }}
   </head>
-<!-- NAVBAR
-================================================== -->
-  <body>
-    <body class="mainbody">{% block body %}
-      <nav class="navbar navbar-main">
-        <div class="container-fluid">
-          <div class="d-flex">
-            <a class="navbar-brand navbartext" href="{{ url_for('store') }}">♚</a>
+  <body class="body">
+    
+    <!-- header -->
+    <header class="ds-header">
+      <div class="container" style="display: flex; flex-direction: row;">
+          <div class="ds-logo" id="login-btn">
+            <a href="{{ url_for('login') }}">Login</a>
           </div>
-          <h1 id="login-name">Please Log In</h1>
-
-          <div class="d-flex flex-row">
-            <a class="btn btnsmall" id="login-btn" href="{{ url_for('login') }}">Login</a>
-            <a class="btn btnsmall" id="logout-btn">Logout</a>
+          <div class="ds-logo" id="logout-btn">
+          <a href="">Logout</a>
         </div>
+      </div>
+    </header>
+    <!-- header -->
+    <!-- banner -->
+    <section class="ds-banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-sm-12  col-md-6  col-lg-7  col-xl-7  col-xxl-7 ds-banner-left">
+              <h1 class="ds-banner-hed">
+                Zak's Online Gaming Store [ZOGS]
+              </h1>
+
+          </div>
+          <div class="col-12 col-sm-12  col-md-6  col-lg-5  col-xl-5  col-xxl-5">
+            <figure>
+              <img src="{{ url_for('static',filename='banner-image.png') }}">
+            </figure>
           </div>
         </div>
-      </nav>
-    <!-- Marketing messaging and featurettes
-    ================================================== -->
-    <!-- Wrap the rest of the page in another container to center all the content. -->
-
-    <div class="container">
-
-      <!-- Three columns of text below the carousel -->
-      <div class="row">
-        {% for item in items %}
-        <div class="col-lg-4 item">
-          <img class="img" src="{{item['image']}}" alt="{{item['name']}}">
-          <div class="itemtext">
-          <h2>{{item["name"]}}</h2>
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
-        </div>
-          <p><a class="btn btn-default" href="{{item['id_']}}" role="button">View details &raquo;</a></p>
-        
-        </div><!-- /.col-lg-4 -->
-        {% endfor %}
-      </div><!-- /.row -->
-
-
-      <!-- START THE FEATURETTES -->
-
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-        </div>
       </div>
-
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-7 col-md-push-5">
-          <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-        <div class="col-md-5 col-md-pull-7">
-          <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-        </div>
+    </section>
+    <!-- banner -->
+    <!-- resume -->
+    <!--<section class="ds-resume-section">
+      <div class="container">
+          <div class="row">
+              <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
+                <h2>I am passionate about building excellent software that improves the lives </h2>
+              </div>
+              <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
+                <p>I am a seasoned software expert who has developed products for enterprise clients such as Intuit, Yale University, and Hewlett-Packard (HP), as well as many venture-backed businesses. I specialize in building applications specific to the business needs of my clients. I have done work in software development, mobile app creation, front-end/back-end web, database/server management, graphic design, and video game development.</p>
+                <a href="#" class="ds-download-button">Download Resume <i class="ri-download-line"></i></a>
+              </div>
+          </div>
       </div>
-
-      <hr class="featurette-divider">
-
-      <div class="row featurette">
-        <div class="col-md-7">
-          <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-          <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-        </div>
-        <div class="col-md-5">
-          <img class="featurette-image img-responsive center-block" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-        </div>
+    </section>-->
+    <!-- projects -->
+    <section class="ds-projects-section">
+      <div class="container">
+          <h2><span>Games</span> </h2>
+          <div class="row ds-projects-listing-section">
+            {% for item in items %}
+            <div style="padding-bottom: 20px"class="col-12 col-sm-12  col-md-4  col-lg-4  col-xl-4  col-xxl-4 ds-projects-loop">
+                <figure>
+                  <a href="{{item['id_']}}" class="ds-link-button"><i class="ri-external-link-line"></i></a>
+                  <img src="{{item['image']}}"" class="ds-image-shadow transition">
+                </figure>
+                <section>
+                  <h3>{{item['name']}}</h3>
+                  <span>Example Description.</span>
+                </section>
+            </div>
+            {% endfor %}
+          </div>
       </div>
-
-      <hr class="featurette-divider">
-
-      <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2016 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
-      </footer>
-
-    </div>
-    {% endblock %}
-  </body>
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
-<script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
+    </section>
+    <!-- projects
+    
+    <section class="ds-email-section">
+       <div class="container">
+          <h2>I'm available for work</h2>
+          <a href="mailto:contact@borstein.com">contact@borstein.com</a>
+       </div>
+    </section>
+    <!-- footer -->
+    <footer class="ds-footer">
+      <div class="container">
+        <span class="ds-copyright">© 2022 All right reserved.</span>
+      </div>
+    </footer>
+    <!-- footer -->
+    <!-- Optional JavaScript; choose one of the two! -->
+    <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-auth.js"></script>
 <!-- TODO: Add SDKs for Firebase products that you want to use
 https://firebase.google.com/docs/web/setup#available-libraries -->
 <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-analytics.js"></script>
-<script>
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </body>
+  <script>
 
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
-apiKey: "AIzaSyAopZxjnk3TnQMPg9NUouUvC6aIsvtDCyo",
-authDomain: "ad-2021-03.firebaseapp.com",
-projectId: "ad-2021-03",
-storageBucket: "ad-2021-03.appspot.com",
-messagingSenderId: "243759511961",
-appId: "1:243759511961:web:8e19eab1cbf743c9d27b08",
-measurementId: "G-FKJT5126NC"
-};
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
 
-// Initialize Firebase
-// Initialize Firebase
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+    apiKey: "AIzaSyAopZxjnk3TnQMPg9NUouUvC6aIsvtDCyo",
+    authDomain: "ad-2021-03.firebaseapp.com",
+    projectId: "ad-2021-03",
+    storageBucket: "ad-2021-03.appspot.com",
+    messagingSenderId: "243759511961",
+    appId: "1:243759511961:web:8e19eab1cbf743c9d27b08",
+    measurementId: "G-FKJT5126NC"
+    };
+
+
+    // Initialize Firebase
+   // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 const auth = firebase.auth();
 console.log(firebase);
 
-const logoutBtn = document.querySelector('#logout-btn');
+    const logoutBtn = document.querySelector('#logout-btn');
 logoutBtn.addEventListener('click', e => {
 e.preventDefault();
 auth.signOut();
@@ -146,7 +148,6 @@ if (user) {
 console.log(user.email + " is logged in!");
 document.querySelector('#logout-btn').hidden = false;
 document.querySelector('#login-btn').hidden = true;
-document.getElementById('login-name').textContent = user.email;
 user.getIdToken().then(function (token) {
         // Add the token to the browser's cookies. The server will then be
         // able to verify the token against the API.
@@ -158,10 +159,9 @@ user.getIdToken().then(function (token) {
 console.log('User is logged out!');
 document.querySelector('#logout-btn').hidden = true;
 document.querySelector('#login-btn').hidden = false;
-document.getElementById('login-name').textContent = "Please Log In";
 document.cookie = "token=" + "; path=/";
 console.log(document.cookie);
 }
 });
-</script>
+  </script>
 </html>
