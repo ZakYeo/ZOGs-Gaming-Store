@@ -102,7 +102,7 @@ document.getElementById('login-name').textContent = user.email;
 user.getIdToken().then(function (token) {
         // Add the token to the browser's cookies. The server will then be
         // able to verify the token against the API.
-        document.cookie = "token=" + token;
+        document.cookie = "token=" + token + "; path=/";
     });
 
 
@@ -111,7 +111,7 @@ console.log('User is logged out!');
 document.querySelector('#logout-btn').hidden = true;
 document.querySelector('#login-btn').hidden = false;
 document.getElementById('login-name').textContent = "Please Log In";
-document.cookie = "token="; 
+document.cookie = "token=" + "; path=/";
 console.log(document.cookie);
 }
 });
