@@ -22,6 +22,10 @@ Code from https://pythonspot.com/login-authentication-with-flask/
     padding: 20px;
     border-radius: 5px
     }
+
+    .loginbtn {
+      margin-bottom: 2px;
+    }
     
     .app-title {
     text-align: center;
@@ -54,7 +58,7 @@ Code from https://pythonspot.com/login-authentication-with-flask/
     
     .btn {
     border: 2px solid transparent;
-    background: #3498DB;
+    background: #FF3B3F;
     color: #ffffff;
     font-size: 16px;
     line-height: 25px;
@@ -68,6 +72,10 @@ Code from https://pythonspot.com/login-authentication-with-flask/
     width: 250px;
     margin: 0 auto;
     }
+
+    .btnsmall {
+      width: 100px;
+      }
     
     .btn:hover {
     background-color: #2980B9;
@@ -80,7 +88,12 @@ Code from https://pythonspot.com/login-authentication-with-flask/
     margin-top: 12px;
     }
 .navbar-main {
-    background-color: #2980B9;
+    background-color: #3498DB;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    border-color: black;
+    border-bottom-style: solid;
+    margin-bottom: 5px;
     }
 .mainbody {
     font-family: Arial;
@@ -98,4 +111,30 @@ Code from https://pythonspot.com/login-authentication-with-flask/
 .gamecol {
     min-width: 480;
     min-height: 210;
+}
+
+.item {
+  border: solid;
+  padding: 0px;
+  margin: 2px;
+  width: 32%;
+  background-color: #caebf2;
+}
+
+.container {
+  max-width: 1500px;
+}
+
+.img {
+  width: 100%;
+}
+
+
+.itemtext {
+  padding: 10px;
+}
+
+
+.singleimg {
+  width: 600px;
 }
