@@ -27,7 +27,7 @@ def store(game):
     else:
         try:
             game = get_games("id_", int(game))["1"]  # Get specific game
-        except ValueError or KeyError:
+        except (ValueError, KeyError) as _:
             return redirect(url_for("store"))
 
         return render_template("game_details.html", game=game)
