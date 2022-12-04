@@ -25,34 +25,37 @@
         <div class="container-fluid">
           <div class="d-flex">
             <a class="navbar-brand navbartext" href="#">♚</a>
-            <div class="d-flex flex-row">
-                <a class="nav-link navbartext" id="login-btn" href="{{ url_for('login') }}">Login</a>
-                <a class="nav-link navbartext" id="logout-btn">Logout</a>
-            </div>
           </div>
           <h1 id="login-name">Please Log In</h1>
 
-            <div class="">
-            <input class="" type="search" placeholder="Search" aria-label="Search">
-            <button type="submit">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-              <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-              </svg>
-            </button>
+          <div class="d-flex flex-row">
+            <a class="btn btnsmall" id="login-btn" href="{{ url_for('login') }}">Login</a>
+            <a class="btn btnsmall" id="logout-btn">Logout</a>
+        </div>
           </div>
         </div>
       </nav>
     <!-- Marketing messaging and featurettes
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
-
-    <div class="container">
-      <div ></div>
+    <div>
+    <div class="imgtitlecontainer"></div>
+    <p class="title"><u>{{game["name"]}}</u></p>
+      <div class="imgcontainer">
         <img class="singleimg" src="{{game['image']}}" alt="{{game['name']}}">
-        <p>{{game["name"]}}</p>
-        <p>{{game["price"]}}</p>
+      </div>
+    </div>
+      <div class="gamedetailscontainer">
+      <div class="details"> 
+        Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.
+        <div class="priceandbutton">
+        <p class="price">£{{game["price"]}}</p>
+        <p><a class="btn" style="width: 160%" href="" role="button">Buy</a></p>
+      </div>
+      </div>
+      
 
-    </div>{% endblock %}
+    </div></div>{% endblock %}
   </body>
   <!-- The core Firebase JS SDK is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>

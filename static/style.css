@@ -62,7 +62,6 @@ Code from https://pythonspot.com/login-authentication-with-flask/
     color: #ffffff;
     font-size: 16px;
     line-height: 25px;
-    padding: 10px 0;
     text-decoration: none;
     text-shadow: none;
     border-radius: 3px;
@@ -137,4 +136,42 @@ Code from https://pythonspot.com/login-authentication-with-flask/
 
 .singleimg {
   width: 600px;
+  height: 300px;
+  border-style: solid;
+}
+.imgcontainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.gamedetailscontainer {
+  border-style: solid;
+  display: flex;
+  flex-direction: column;
+  margin: 25px;
+  margin-left: 100px;
+  margin-right: 100px;
+  background-color: #caebf2;
+}
+
+.title {
+  font-size: 35px;
+  margin-left: 100px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.price {
+
+  font-size: 30px;
+}
+
+.priceandbutton {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
