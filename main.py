@@ -71,5 +71,13 @@ def get_games(key=None, value=None):
     return resp.json()
 
 
+def update_game(token=None, filter_key=None, filter_value=None, new_key=None, new_value=None):
+    url = f"{BASE_URL}/update-game?token={token}&filter_key={filter_key}&filter_value={filter_value}&new_key={new_key}&new_value={new_value}"
+
+    resp = requests.get(url)
+
+    return resp.json()
+
+
 if __name__ == '__main__':
     app.run(debug=True)
