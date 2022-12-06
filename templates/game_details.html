@@ -107,7 +107,7 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 const auth = firebase.auth();
 console.log(firebase);
-const original = document.querySelector('#gametitle').innerText;
+let original = document.querySelector('#gametitle').innerText;
 
 const logoutBtn = document.querySelector('#logout-btn');
 logoutBtn.addEventListener('click', e => {
@@ -178,7 +178,7 @@ const myWidget = cloudinary.createUploadWidget(
       xhr.setRequestHeader("Content-Type", "application/json");
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
-            console.log(xhr.responseText);
+            alert(xhr.responseText);
         }};
       xhr.send(`
         {"filter_key": "id_",
@@ -217,7 +217,7 @@ document.getElementById("gametitle").addEventListener('blur', (event) => {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = function () {
       if (xhr.readyState === 4) {
-          console.log(xhr.responseText);
+          alert(xhr.responseText);
           original = event.srcElement.innerText;
       }};
     xhr.send(`
