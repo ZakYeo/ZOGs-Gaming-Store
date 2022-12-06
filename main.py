@@ -7,7 +7,6 @@ import requests
 
 datastore_client = datastore.Client(project="ad-2021-03")
 BASE_URL = "https://europe-west1-ad-2021-03.cloudfunctions.net"
-
 app = Flask(__name__, template_folder="templates", static_folder="static")
 app.secret_key = urandom(12)
 Bootstrap5(app)
@@ -15,7 +14,8 @@ Bootstrap5(app)
 
 @app.route("/store", defaults={"game": ""})
 @app.route("/store/", defaults={"game": ""})
-@app.route("/store/<game>")
+@app.route("/store/<game>/")
+@app.route("/store/<game>/update/")
 def store(game):
 
     if not game:
@@ -30,6 +30,15 @@ def store(game):
         except (ValueError, KeyError) as _:
             return redirect(url_for("store"))
 
+        filter_key = request.args.get('filter_key')
+        filter_value = request.args.get('filter_value')
+        new_key = request.args.get('new_key')
+        new_value = request.args.get('new_value')
+
+        if filter_key and filter_value and new_key and new_value:
+            resp = update_game(request.cookies.get("token"), filter_key,
+                               filter_value, new_key, new_value)
+            return (resp.json(), resp.status_code)
         return render_template("game_details.html", game=game)
 
 
@@ -76,7 +85,7 @@ def update_game(token=None, filter_key=None, filter_value=None, new_key=None, ne
 
     resp = requests.get(url)
 
-    return resp.json()
+    return resp
 
 
 if __name__ == '__main__':
