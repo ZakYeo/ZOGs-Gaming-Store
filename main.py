@@ -1,3 +1,4 @@
+from pymongo import MongoClient
 from flask import Flask, redirect, url_for, request, render_template
 from flask_bootstrap import Bootstrap5
 from os import urandom
@@ -58,6 +59,19 @@ def login():
         return render_template('login.html')
 
 
+@ app.route("/admin/", methods=["GET"])
+def admin():
+
+    claims = check_firebase_login(request.cookies.get("token"))
+    admin = 0
+    if claims:
+        resp = is_administrator(claims["user_id"])
+        if resp["administrator"] == 1:
+            admin = 1
+
+    return ({"administrator": admin}, 200)
+
+
 def check_firebase_login(token=""):
     url = f"{BASE_URL}/verify-firebase-token?token={token}"
 
@@ -87,6 +101,15 @@ def update_game(token=None, filter_key=None, filter_value=None, new_key=None, ne
     resp = requests.get(url)
 
     return resp
+
+
+def is_administrator(user_id):
+
+    url = f"{BASE_URL}/is-administrator?user_id={user_id}"
+
+    resp = requests.get(url)
+
+    return resp.json()
 
 
 if __name__ == '__main__':

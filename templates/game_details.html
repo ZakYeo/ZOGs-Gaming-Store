@@ -52,7 +52,7 @@
           </div>
           <div class="col-12 col-sm-12  col-md-6  col-lg-5  col-xl-5  col-xxl-5">
             <figure>
-              <button id="upload" style="opacity: 1;" class="ds-link-button"><i class="ri-upload-2-fill"></i></button>
+              <button hidden id="upload" style="opacity: 1;" class="ds-link-button"><i class="ri-upload-2-fill"></i></button>
               <img id="uploadedimage" src="{{game['image']}}">
             </figure>
           </div>
@@ -109,9 +109,7 @@ console.log(firebase);
 let originalTitle = document.querySelector('#gametitle').innerText;
 let originalDesc = document.querySelector('#gamedesc').innerText;
 let originalPrice = document.querySelector('#gameprice').innerText;
-document.querySelector('#gametitle').contentEditable = true;
-document.querySelector('#gamedesc').contentEditable = true;
-document.querySelector('#gameprice').contentEditable = true;
+
 const logoutBtn = document.querySelector('#logout-btn');
 logoutBtn.addEventListener('click', e => {
 e.preventDefault();
@@ -128,13 +126,32 @@ auth.onAuthStateChanged(user => {
             // Add the token to the browser's cookies. The server will then be
             // able to verify the token against the API.
             document.cookie = "token=" + token + "; path=/";
-        });
+            let xhr = new XMLHttpRequest();
+            let url = window.location.href.split("store")[0];
+            xhr.open("GET", url );
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
+            xhr.onreadystatechange = function () {
+              if (xhr.readyState === 4) {
+                  if(xhr.responseText.administrator === 1){
+                    document.querySelector('#gametitle').contentEditable = true;
+                    document.querySelector('#gamedesc').contentEditable = true;
+                    document.querySelector('#gameprice').contentEditable = true;
+                    document.querySelector('#upload').hidden = false;
+                  }
+              }};
+              xhr.send();
+            });
   } else {
     console.log('User is logged out!');
     document.querySelector('#logout-btn').hidden = true;
     document.querySelector('#login-btn').hidden = false;
     document.cookie = "token=" + "; path=/";
     console.log(document.cookie);
+    document.querySelector('#gametitle').contentEditable = false;
+    document.querySelector('#gamedesc').contentEditable = false;
+    document.querySelector('#gameprice').contentEditable = false;
+    document.querySelector('#upload').hidden = true;
   }
 });
 
