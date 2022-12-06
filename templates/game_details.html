@@ -169,23 +169,7 @@ const myWidget = cloudinary.createUploadWidget(
         .getElementById("uploadedimage")
         .setAttribute("src", result.info.secure_url);
 
-      let xhr = new XMLHttpRequest();
-      let id = window.location.href.split("/")[4];
-      console.log(id);
-      const url = `${window.location.href}/update/`;
-      xhr.open("POST", url );
-      xhr.setRequestHeader("Accept", "application/json");
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            alert(xhr.responseText);
-        }};
-      xhr.send(`
-        {"filter_key": "id_",
-        "filter_value": ${id}, 
-        "new_key": "image", 
-        "new_value": "${result.info.secure_url}"}`
-      );
+      send_post_request("image", result.info.secure_url);
     }
   }
 );
@@ -208,26 +192,28 @@ document.getElementById("gametitle").addEventListener(
 
 document.getElementById("gametitle").addEventListener('blur', (event) => {
   if( event.srcElement.innerText != original){
-    let xhr = new XMLHttpRequest();
-    let id = window.location.href.split("/")[4];
-    console.log(id);
-    const url = `${window.location.href}/update/`;
-    xhr.open("POST", url );
-    xhr.setRequestHeader("Accept", "application/json");
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4) {
-          alert(xhr.responseText);
-          original = event.srcElement.innerText;
-      }};
-    xhr.send(`
-        {"filter_key": "id_",
-        "filter_value": ${id}, 
-        "new_key": "name", 
-        "new_value": "${event.srcElement.innerText}"}`
-      );
+    send_post_request("name", event.srcElement.innerText);
   }
 });
 
+function send_post_request(new_key, new_value) {
+  let xhr = new XMLHttpRequest();
+      let id = window.location.href.split("/")[4];
+      console.log(id);
+      const url = `${window.location.href}/update/`;
+      xhr.open("POST", url );
+      xhr.setRequestHeader("Accept", "application/json");
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            alert(xhr.responseText);
+        }};
+      xhr.send(`
+        {"filter_key": "id_",
+        "filter_value": ${id}, 
+        "new_key": "${new_key}", 
+        "new_value": "${new_value}"}`
+      );
+}
 </script>
 </html>
