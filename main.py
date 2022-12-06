@@ -15,7 +15,7 @@ Bootstrap5(app)
 @app.route("/store", defaults={"game": ""})
 @app.route("/store/", defaults={"game": ""})
 @app.route("/store/<game>/")
-@app.route("/store/<game>/update/")
+@app.route("/store/<game>/update/", methods=['POST'])
 def store(game):
 
     if not game:
@@ -30,14 +30,15 @@ def store(game):
         except (ValueError, KeyError) as _:
             return redirect(url_for("store"))
 
-        filter_key = request.args.get('filter_key')
-        filter_value = request.args.get('filter_value')
-        new_key = request.args.get('new_key')
-        new_value = request.args.get('new_value')
-
-        if filter_key and filter_value and new_key and new_value:
+        if request.method == 'POST':
+            json = request.get_json()
+            filter_key = json["filter_key"]
+            filter_value = json["filter_value"]
+            new_key = json["new_key"]
+            new_value = json["new_value"]
             resp = update_game(request.cookies.get("token"), filter_key,
                                filter_value, new_key, new_value)
+
             return (resp.json(), resp.status_code)
         return render_template("game_details.html", game=game)
 

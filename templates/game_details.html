@@ -45,7 +45,7 @@
       <div class="container">
         <div class="row">
           <div class="col-12 col-sm-12  col-md-6  col-lg-7  col-xl-7  col-xxl-7 ds-banner-left">
-              <h1 class="ds-banner-hed">
+              <h1 contentEditable id="gametitle" class="ds-banner-hed">
                 {{game['name']}}
               </h1>
 
@@ -107,6 +107,7 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 const auth = firebase.auth();
 console.log(firebase);
+const original = document.querySelector('#gametitle').innerText;
 
 const logoutBtn = document.querySelector('#logout-btn');
 logoutBtn.addEventListener('click', e => {
@@ -171,15 +172,20 @@ const myWidget = cloudinary.createUploadWidget(
       let xhr = new XMLHttpRequest();
       let id = window.location.href.split("/")[4];
       console.log(id);
-      const url = `${window.location.href}/update/?filter_key=id_&filter_value=${id}&new_key=image&new_value=${result.info.secure_url}`;
-      xhr.open("GET", url );
-      xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+      const url = `${window.location.href}/update/`;
+      xhr.open("POST", url );
+      xhr.setRequestHeader("Accept", "application/json");
+      xhr.setRequestHeader("Content-Type", "application/json");
       xhr.onreadystatechange = function () {
         if (xhr.readyState === 4) {
             console.log(xhr.responseText);
         }};
-
-      xhr.send();
+      xhr.send(`
+        {"filter_key": "id_",
+        "filter_value": ${id}, 
+        "new_key": "image", 
+        "new_value": "${result.info.secure_url}"}`
+      );
     }
   }
 );
@@ -191,5 +197,37 @@ document.getElementById("upload").addEventListener(
   },
   false
 );
+
+document.getElementById("gametitle").addEventListener(
+  "keypress",
+  e => {
+    console.log(e);
+  },
+  false
+);
+
+document.getElementById("gametitle").addEventListener('blur', (event) => {
+  if( event.srcElement.innerText != original){
+    let xhr = new XMLHttpRequest();
+    let id = window.location.href.split("/")[4];
+    console.log(id);
+    const url = `${window.location.href}/update/`;
+    xhr.open("POST", url );
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4) {
+          console.log(xhr.responseText);
+          original = event.srcElement.innerText;
+      }};
+    xhr.send(`
+        {"filter_key": "id_",
+        "filter_value": ${id}, 
+        "new_key": "name", 
+        "new_value": "${event.srcElement.innerText}"}`
+      );
+  }
+});
+
 </script>
 </html>
