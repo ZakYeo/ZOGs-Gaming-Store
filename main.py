@@ -1,4 +1,3 @@
-from pymongo import MongoClient
 from flask import Flask, redirect, url_for, request, render_template
 from flask_bootstrap import Bootstrap5
 from os import urandom
