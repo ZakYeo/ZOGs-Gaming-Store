@@ -126,12 +126,7 @@ auth.onAuthStateChanged(user => {
             // Add the token to the browser's cookies. The server will then be
             // able to verify the token against the API.
             document.cookie = "token=" + token + "; path=/";
-            if(is_admin()){
-              document.querySelector('#gametitle').contentEditable = true;
-              document.querySelector('#gamedesc').contentEditable = true;
-              document.querySelector('#gameprice').contentEditable = true;
-              document.querySelector('#upload').hidden = false;
-            }
+            enable_edit();
             });
   } else {
     console.log('User is logged out!');
@@ -213,7 +208,7 @@ function send_post_request(new_key, new_value) {
       );
 }
 
-function is_admin(){
+function enable_edit(){
   let xhr = new XMLHttpRequest();
   let url = window.location.href.split("store")[0];
   xhr.open("GET", `${url}/admin` );
@@ -224,9 +219,10 @@ function is_admin(){
     if (xhr.readyState === 4) {
       resp = JSON.parse(xhr.responseText);
         if(resp["administrator"] === 1){
-          return true;
-        }else{
-          return false;
+          document.querySelector('#gametitle').contentEditable = true;
+              document.querySelector('#gamedesc').contentEditable = true;
+              document.querySelector('#gameprice').contentEditable = true;
+              document.querySelector('#upload').hidden = false;
         }
     }};
     xhr.send();
