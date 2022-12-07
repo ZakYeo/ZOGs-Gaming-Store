@@ -128,12 +128,14 @@ auth.onAuthStateChanged(user => {
             document.cookie = "token=" + token + "; path=/";
             let xhr = new XMLHttpRequest();
             let url = window.location.href.split("store")[0];
-            xhr.open("GET", url );
+            xhr.open("GET", `${url}/admin` );
             xhr.setRequestHeader("Accept", "application/json");
             xhr.setRequestHeader("Content-Type", "application/json");
+            
             xhr.onreadystatechange = function () {
               if (xhr.readyState === 4) {
-                  if(xhr.responseText.administrator === 1){
+                resp = JSON.parse(xhr.responseText);
+                  if(xhr.responseText["administrator"] === 1){
                     document.querySelector('#gametitle').contentEditable = true;
                     document.querySelector('#gamedesc').contentEditable = true;
                     document.querySelector('#gameprice').contentEditable = true;
