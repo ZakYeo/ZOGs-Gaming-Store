@@ -3,6 +3,7 @@ from flask_bootstrap import Bootstrap5
 from os import urandom
 from google.cloud import datastore
 import requests
+from datetime import datetime
 
 
 datastore_client = datastore.Client(project="ad-2021-03")
@@ -53,6 +54,8 @@ def login():
 
     claims = check_firebase_login(request.cookies.get("token"))
     if(claims):  # User is logged in
+        if(request.method == "POST"):  # User is logging in, record
+            record_login(datetime.now(), claims["user_id"], claims["email"])
         return redirect(url_for("store"))
     else:  # User is not logged in
         return render_template('login.html')
@@ -69,6 +72,24 @@ def admin():
             admin = 1
 
     return ({"administrator": admin}, 200)
+
+
+def record_login(time, user_id, email):
+    entity = datastore.Entity(key=datastore_client.key('login'))
+    entity.update({
+        'timestamp': time,
+        'user_id': user_id,
+        'email': email
+    })
+    datastore_client.put(entity)
+
+
+def fetch_times(limit):
+    url = f"{BASE_URL}/get-logins?limit={limit}"
+
+    resp = requests.get(url)
+
+    return resp.json()
 
 
 def check_firebase_login(token=""):
