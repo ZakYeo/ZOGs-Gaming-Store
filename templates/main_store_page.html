@@ -161,10 +161,13 @@ user.getIdToken().then(function (token) {
           if (xhr.readyState === 4) {
             resp = JSON.parse(xhr.responseText);
               if(resp["administrator"] === 1){
-                render_logins();
+                console.log("admin");
+                render_analytics();
               }
           }};
           xhr.send();
+          
+
     });
 
 
@@ -176,8 +179,9 @@ document.querySelector('#admin').hidden = true;
 document.cookie = "token=" + "; path=/";
 console.log(document.cookie);
 }
+});
 
-function render_logins(){
+function render_analytics() {
   let xhr = new XMLHttpRequest();
   let url = window.location.href.split("store")[0];
   console.log(url);
@@ -192,14 +196,12 @@ function render_logins(){
       console.log(resp.length);
       for(let i=0; i< Object.keys(resp).length; i++){
         str += `${resp[i].timestamp}: ${resp[i].email}\n`
+        console.log(str);
       }
       document.querySelector('#logininfo').innerText = str;
         
     }};
-  xhr.send();
-}                  
+  xhr.send();                 
 }
-
-});
-  </script>
+</script>
 </html>
