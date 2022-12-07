@@ -74,6 +74,11 @@ def admin():
     return ({"administrator": admin}, 200)
 
 
+@ app.route("/times/<limit>", methods=["GET"])
+def times(limit):
+    return (fetch_times(limit), 200)
+
+
 def record_login(time, user_id, email):
     entity = datastore.Entity(key=datastore_client.key('login'))
     entity.update({

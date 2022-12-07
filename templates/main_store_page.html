@@ -55,19 +55,6 @@
     </section>
     <!-- banner -->
     <!-- resume -->
-    <!--<section class="ds-resume-section">
-      <div class="container">
-          <div class="row">
-              <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
-                <h2>I am passionate about building excellent software that improves the lives </h2>
-              </div>
-              <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
-                <p>I am a seasoned software expert who has developed products for enterprise clients such as Intuit, Yale University, and Hewlett-Packard (HP), as well as many venture-backed businesses. I specialize in building applications specific to the business needs of my clients. I have done work in software development, mobile app creation, front-end/back-end web, database/server management, graphic design, and video game development.</p>
-                <a href="#" class="ds-download-button">Download Resume <i class="ri-download-line"></i></a>
-              </div>
-          </div>
-      </div>
-    </section>-->
     <!-- projects -->
     <section class="ds-projects-section">
       <div class="container">
@@ -85,6 +72,18 @@
                 </section>
             </div>
             {% endfor %}
+          </div>
+      </div>
+    </section>
+    <section hidden id="admin" class="ds-resume-section">
+      <div class="container">
+          <div class="row">
+              <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
+                <h2>Logins:</h2>
+              </div>
+              <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
+                <p id="logininfo"></p>
+              </div>
           </div>
       </div>
     </section>
@@ -152,6 +151,28 @@ user.getIdToken().then(function (token) {
         // Add the token to the browser's cookies. The server will then be
         // able to verify the token against the API.
         document.cookie = "token=" + token + "; path=/";
+        if(is_admin()){
+          let xhr = new XMLHttpRequest();
+          let url = window.location.href.split("store")[0];
+          console.log(url);
+          xhr.open("GET", `${url}/times/10` );
+          xhr.setRequestHeader("Accept", "application/json");
+          xhr.setRequestHeader("Content-Type", "application/json");
+          
+          xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+              resp = JSON.parse(xhr.responseText);
+              str = "";
+              console.log(resp.length);
+              for(let i=0; i< Object.keys(resp).length; i++){
+                str += `${resp[i].timestamp}: ${resp[i].email}\n`
+              }
+              document.querySelector('#logininfo').innerText = str;
+                
+            }};
+          xhr.send();
+        }                  
+
     });
 
 
@@ -159,9 +180,30 @@ user.getIdToken().then(function (token) {
 console.log('User is logged out!');
 document.querySelector('#logout-btn').hidden = true;
 document.querySelector('#login-btn').hidden = false;
+document.querySelector('#admin').hidden = true;
 document.cookie = "token=" + "; path=/";
 console.log(document.cookie);
 }
+
+function is_admin(){
+  let xhr = new XMLHttpRequest();
+  let url = window.location.href.split("store")[0];
+  xhr.open("GET", `${url}/admin` );
+  xhr.setRequestHeader("Accept", "application/json");
+  xhr.setRequestHeader("Content-Type", "application/json");
+  
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      resp = JSON.parse(xhr.responseText);
+        if(resp["administrator"] === 1){
+          return true;
+        }else{
+          return false;
+        }
+    }};
+    xhr.send();
+}
+
 });
   </script>
 </html>

@@ -126,23 +126,12 @@ auth.onAuthStateChanged(user => {
             // Add the token to the browser's cookies. The server will then be
             // able to verify the token against the API.
             document.cookie = "token=" + token + "; path=/";
-            let xhr = new XMLHttpRequest();
-            let url = window.location.href.split("store")[0];
-            xhr.open("GET", `${url}/admin` );
-            xhr.setRequestHeader("Accept", "application/json");
-            xhr.setRequestHeader("Content-Type", "application/json");
-            
-            xhr.onreadystatechange = function () {
-              if (xhr.readyState === 4) {
-                resp = JSON.parse(xhr.responseText);
-                  if(resp["administrator"] === 1){
-                    document.querySelector('#gametitle').contentEditable = true;
-                    document.querySelector('#gamedesc').contentEditable = true;
-                    document.querySelector('#gameprice').contentEditable = true;
-                    document.querySelector('#upload').hidden = false;
-                  }
-              }};
-              xhr.send();
+            if(is_admin()){
+              document.querySelector('#gametitle').contentEditable = true;
+              document.querySelector('#gamedesc').contentEditable = true;
+              document.querySelector('#gameprice').contentEditable = true;
+              document.querySelector('#upload').hidden = false;
+            }
             });
   } else {
     console.log('User is logged out!');
@@ -222,6 +211,25 @@ function send_post_request(new_key, new_value) {
         "new_key": "${new_key}", 
         "new_value": "${new_value}"}`
       );
+}
+
+function is_admin(){
+  let xhr = new XMLHttpRequest();
+  let url = window.location.href.split("store")[0];
+  xhr.open("GET", `${url}/admin` );
+  xhr.setRequestHeader("Accept", "application/json");
+  xhr.setRequestHeader("Content-Type", "application/json");
+  
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      resp = JSON.parse(xhr.responseText);
+        if(resp["administrator"] === 1){
+          return true;
+        }else{
+          return false;
+        }
+    }};
+    xhr.send();
 }
 </script>
 </html>
