@@ -137,5 +137,17 @@ def is_administrator(user_id):
     return resp.json()
 
 
+def get_all_games_mesh_layer_firebasedb(key=None, value=None):
+
+    url = f"{BASE_URL}/get-all-games-mesh-layer-firebasedb"
+
+    if key is not None and value is not None:
+        url += f"?key={key}&value={value}"
+
+    resp = requests.get(url)
+
+    return resp.json()
+
+
 if __name__ == '__main__':
     app.run(debug=True)
