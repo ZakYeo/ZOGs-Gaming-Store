@@ -20,15 +20,16 @@ Bootstrap5(app)
 def store(game):
 
     if not game:
-        games = get_all_games_mesh_layer_mongodb()
+        games = get_all_games("mongodb").json()
         items = list(games.values())
         # sort games alphabetically by name
         items = sorted(items, key=lambda item: item["name"])
         return render_template("main_store_page.html", items=items)
     else:
         try:
-            game = get_all_games_mesh_layer_mongodb(
-                "id_", int(game))["1"]  # Get specific game
+            game = get_all_games("mongodb",
+                                 "id_", int(game)).json()["1"]  # Get specific game
+
         except (ValueError, KeyError) as _:
             return redirect(url_for("store"))
 
@@ -109,18 +110,6 @@ def check_firebase_login(token=""):
         return None
 
 
-def get_all_games_mesh_layer_mongodb(key=None, value=None):
-
-    url = f"{BASE_URL}/get-all-games-mesh-layer-mongodb"
-
-    if(key and value):
-        url += f"?key={key}&value={value}"
-
-    resp = requests.get(url)
-
-    return resp.json()
-
-
 def update_game(token=None, filter_key=None, filter_value=None, new_key=None, new_value=None):
     url = f"{BASE_URL}/update-game?token={token}&filter_key={filter_key}&filter_value={filter_value}&new_key={new_key}&new_value={new_value}"
 
@@ -138,16 +127,16 @@ def is_administrator(user_id):
     return resp.json()
 
 
-def get_all_games_mesh_layer_firebasedb(key=None, value=None):
+def get_all_games(db, key=None, value=None):
 
-    url = f"{BASE_URL}/get-all-games-mesh-layer-firebasedb"
+    url = f"{BASE_URL}/get-all-games-service-layer?db={db}"
 
-    if key is not None and value is not None:
-        url += f"?key={key}&value={value}"
+    if key and value:
+        url += f"&key={key}&value={value}"
 
     resp = requests.get(url)
 
-    return resp.json()
+    return resp
 
 
 if __name__ == '__main__':
