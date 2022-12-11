@@ -4,6 +4,7 @@ from os import urandom
 from google.cloud import datastore
 import requests
 from datetime import datetime
+from time import sleep
 
 
 datastore_client = datastore.Client(project="ad-2021-03")
@@ -20,17 +21,17 @@ Bootstrap5(app)
 def store(game):
 
     if not game:
-        games = get_all_games("mongodb").json()
-        items = list(games.values())
-        # sort games alphabetically by name
-        items = sorted(items, key=lambda item: item["name"])
+        resp = handle_game_request()
+        items = []
+        if resp:
+            games = resp.json()
+            items = list(games.values())
+            # sort games alphabetically by name
+            items = sorted(items, key=lambda item: item["name"])
         return render_template("main_store_page.html", items=items)
     else:
-        try:
-            game = get_all_games("mongodb",
-                                 "id_", int(game)).json()["1"]  # Get specific game
-
-        except (ValueError, KeyError) as _:
+        resp = handle_game_request("id_", int(game))
+        if(resp is None or len(resp.json()) == 0):  # Game not found
             return redirect(url_for("store"))
 
         if request.method == 'POST':
@@ -43,7 +44,7 @@ def store(game):
                                filter_value, new_key, new_value)
 
             return (resp.json(), resp.status_code)
-        return render_template("game_details.html", game=game)
+        return render_template("game_details.html", game=game.json()["1"])
 
 
 @ app.route("/")
@@ -79,6 +80,39 @@ def admin():
 @ app.route("/times/<limit>", methods=["GET"])
 def times(limit):
     return (fetch_times(limit), 200)
+
+
+def handle_game_request(key=None, value=None):
+    code = 503  # Service Unavailable
+    attempts = 0
+    while code == 503:
+
+        sleep(attempts**2)  # Exponential backoff
+
+        if key and value:
+            resp = get_all_games("mongodb",
+                                 key, value)
+        else:
+            resp = get_all_games("mongodb")
+        code = resp.status_code
+        print(code)
+        if(code == 503):  # Database busy / offline / corrupt etc, try backup DB
+            if key and value:
+                resp = get_all_games("firebasedb",
+                                     key, value)
+            else:
+                resp = get_all_games("firebasedb")
+            code = resp.status_code
+            print(code)
+        elif(code == 400):  # Clientside error, bad request
+            return None
+
+        attempts += 1
+        print(attempts)
+        if attempts == 5:
+            # After 5 attempts just end
+            return None
+    return resp
 
 
 def record_login(time, user_id, email):
