@@ -52,16 +52,9 @@ def home():
     return redirect(url_for("store"))
 
 
-@ app.route('/login', methods=['POST', 'GET'])
+@ app.route('/login', methods=['GET'])
 def login():
-
-    claims = check_firebase_login(request.cookies.get("token"))
-    if(claims):  # User is logged in
-        if(request.method == "POST"):  # User is logging in, record
-            record_login(datetime.now(), claims["user_id"], claims["email"])
-        return redirect(url_for("store"))
-    else:  # User is not logged in
-        return render_template('login.html')
+    return render_template('login.html')
 
 
 @ app.route("/admin/", methods=["GET"])
@@ -85,7 +78,7 @@ def times(limit):
 def handle_game_request(key=None, value=None):
     code = 503  # Service Unavailable
     attempts = 0
-    while code == 503:
+    while code == 503 or code == 500:
 
         sleep(attempts**2)  # Exponential backoff
 
@@ -96,7 +89,7 @@ def handle_game_request(key=None, value=None):
             resp = get_all_games("mongodb")
         code = resp.status_code
         print(code)
-        if(code == 503):  # Database busy / offline / corrupt etc, try backup DB
+        if(code == 503 or code == 500):  # Database busy / offline / corrupt etc, try backup DB
             if key and value:
                 resp = get_all_games("firebasedb",
                                      key, value)

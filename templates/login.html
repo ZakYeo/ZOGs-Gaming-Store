@@ -13,7 +13,6 @@
     <body class="loginbody">{% block body %}
 
         <!-- Code from https://pythonspot.com/login-authentication-with-flask/ -->
-        <form action = "/login" method = "post">
             <div class="login">
                 <div class="login-screen">
                     <div class="app-title">
@@ -36,7 +35,6 @@
                             </div>
                         </div>
                     </div>
-                </form>
         {% endblock %}
     </body>
     <!-- The core Firebase JS SDK is always required and must be listed first -->
@@ -104,12 +102,16 @@ const loginBtn = document.querySelector('#login-btn');
   const email = document.querySelector('#email').value;
   const password = document.querySelector('#password').value;
 
+  console.log(email);
+  console.log(password);
+
+
   auth.signInWithEmailAndPassword(email, password)
     .then(cred => {
       console.log('Logged in user!');
     })
     .catch(error => {
-      console.log(error.message);
+      alert(error.message);
     })
 });
 
@@ -120,6 +122,8 @@ auth.onAuthStateChanged(user => {
         // Add the token to the browser's cookies. The server will then be
         // able to verify the token against the API.
         document.cookie = "token=" + token + "; path=/";
+        let url = window.location.href.slice(0, -5); // Remove login from end of url
+        location.href = url + '/store'; // User's logged in, now load the store
     }); 
   } else {
     var ui = new firebaseui.auth.AuthUI(firebase.auth());
