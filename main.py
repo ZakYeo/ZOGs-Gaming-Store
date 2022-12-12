@@ -55,7 +55,7 @@ def store(game):
 
             return (resp.json(), resp.status_code)  # Return response
         # Now render game
-        return render_template("game_details.html", game=game.json()["1"])
+        return render_template("game_details.html", game=resp.json()["1"])
 
 
 @ app.route("/")
