@@ -1,27 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
+    <!--Meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Google Fots -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <!-- Favicon -->
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <!-- Remixicon Icon -->
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-    <!-- Remixicon Icon -->
-    <!-- Bootstrap CSS -->
-
+    
     <!-- Main CSS -->
     <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
     <title>[ZOGS]</title>
+    <!-- Bootstrap CSS -->
     {{ bootstrap.load_js() }}
     {{ bootstrap.load_css() }}
   </head>
-<!-- NAVBAR
-================================================== -->
   <body class="body">
     {% block body %}
     <!-- header -->
@@ -40,8 +39,7 @@
       
     </div>
     </header>
-    <!-- header -->
-    <!-- banner -->
+    <!-- Banner Section -->
     <section class="ds-banner">
       <div class="container">
         <div class="row">
@@ -60,31 +58,27 @@
         </div>
       </div>
     </section>
-    <!-- banner -->
+    <!-- Game Section -->
     <section class="ds-resume-section">
       <div class="container">
-          <div class="row">
-              <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
-                <h2 id="gameprice" class="price">£{{game['price']}}</h2>
-              </div>
-              <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
-                <p id="gamedesc">{{game['desc_long']}}</p>
-                <a href="#" class="ds-download-button">Purchase Game<i class="ri-download-line"></i></a>
-              </div>
+        <div class="row">
+          <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
+            <h2 id="gameprice" class="price">£{{game['price']}}</h2>
           </div>
+          <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
+            <p id="gamedesc">{{game['desc_long']}}</p>
+            <a href="#" class="ds-download-button">Purchase Game<i class="ri-download-line"></i></a>
+          </div>
+        </div>
       </div>
     </section>
-    
-      
-
-    </div></div>{% endblock %}
-  </body>
-  <!-- The core Firebase JS SDK is always required and must be listed first -->
+{% endblock %}
+</body>
+<!-- Scripts -->
 <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-auth.js"></script>
-<!-- TODO: Add SDKs for Firebase products that you want to use
-https://firebase.google.com/docs/web/setup#available-libraries -->
 <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-analytics.js"></script>
+<!-- Cloudinary API -->
 <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
 <script>
 // TODO: Add SDKs for Firebase products that you want to use
