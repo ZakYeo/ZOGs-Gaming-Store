@@ -1,49 +1,59 @@
 <html>
-    <head>
-        <script src="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.js"></script>
-        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.css">
-        <!-- [END gae_python3_auth_include_firebaseui] -->
-        <!-- [END gae_python38_auth_include_firebaseui] -->
-        <script src="{{ url_for('static', filename='script.js') }}"></script>
-        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
-        {{ bootstrap.load_js() }}
-        {{ bootstrap.load_css() }}
+  <head>
+    <!-- Meta tags -->
+    <meta charset="utf-8">
 
-        <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
-    </head>
-    <body class="loginbody">{% block body %}
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 
-        <!-- Code from https://pythonspot.com/login-authentication-with-flask/ -->
-            <div class="login">
-                <div class="login-screen">
-                    <div class="app-title">
-                        <h1>Login</h1>
-                    </div>
-                    <div class="login-form">
-                        <div class="control-group">
-                            <input id="email" type="text" class="login-field" value="" placeholder="email" name="username">
-                            <label class="login-field-icon fui-user" for="login-name"></label></div>
-                            <div class="control-group">
-                                <input id="password" type="password" class="login-field" value="" placeholder="password" name="password">
-                                <label class="login-field-icon fui-lock" for="login-pass"></label></div>
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-                                <input id="login-btn" type="submit" value="Log In" class="btn btn-large btn-block">
+    <!-- Firebase CSS -->
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.css">
+    
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_js() }}
+    {{ bootstrap.load_css() }}
 
-                                <input id="signup-btn" type="submit" value="Sign Up" class="btn btn-large btn-block">
-                            </div>
-                            
-                            <div id="firebaseui-auth-container"></div>
-                            </div>
-                        </div>
-                    </div>
-        {% endblock %}
-    </body>
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}">
+
+    <!-- Firebase Login UI -->
+    <script src="https://www.gstatic.com/firebasejs/ui/4.5.0/firebase-ui-auth.js"></script>
+  </head>
+  <body class="loginbody">{% block body %}
+
+    <!-- Code from https://pythonspot.com/login-authentication-with-flask/ -->
+    <!-- Login Section -->
+    <div class="login">
+      <div class="login-screen">
+        <div class="app-title">
+          <h1>Login</h1>
+        </div>
+        <div class="login-form">
+          <div class="control-group">
+            <input id="email" type="text" class="login-field" value="" placeholder="email" name="username">
+            <label class="login-field-icon fui-user" for="login-name"></label>
+          </div>
+          <div class="control-group">
+            <input id="password" type="password" class="login-field" value="" placeholder="password" name="password">
+            <label class="login-field-icon fui-lock" for="login-pass"></label></div>
+            <input id="login-btn" type="submit" value="Log In" class="btn btn-large btn-block">
+            <input id="signup-btn" type="submit" value="Sign Up" class="btn btn-large btn-block">
+          </div>
+          <div id="firebaseui-auth-container"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock %}
+  </body>
+    <!-- Scripts -->
     <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-auth.js"></script>
-    <!-- TODO: Add SDKs for Firebase products that you want to use
-    https://firebase.google.com/docs/web/setup#available-libraries -->
     <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-analytics.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
     <script>
     // TODO: Add SDKs for Firebase products that you want to use
     // https://firebase.google.com/docs/web/setup#available-libraries
