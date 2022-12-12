@@ -4,6 +4,7 @@ from os import urandom
 from google.cloud import datastore
 import requests
 from time import sleep
+from datetime import datetime
 
 
 datastore_client = datastore.Client(project="ad-2021-03")
@@ -65,6 +66,7 @@ def home():
 
 
 @ app.route('/login', methods=['GET'])
+@ app.route('/login/record', methods=['POST'])
 def login():
     """Renders the login.html at this endpoint"""
     return render_template('login.html')
@@ -105,6 +107,23 @@ def times(limit):
         HTTP status code 200 if successful       
     """
     return (fetch_times(limit), 200)
+
+
+@ app.route("/record", methods=["POST"])
+def record():
+    """ Records the POSTed json into the Google Datastore
+    Intended use is for logging purposes to display to admins.
+    e.g recording a login
+    """
+    data = request.json
+    entity = datastore.Entity(key=datastore_client.key('login'))
+    claims = check_firebase_login(request.cookies.get("token"))
+    if data["type"] == "login":  # Record a login from any user
+        entity.update({"timestamp": datetime.now(),
+                       "user_id": claims["user_id"],
+                       "email": claims["email"]
+                       })
+    datastore_client.put(entity)
 
 
 def handle_game_request(key=None, value=None):
@@ -152,17 +171,6 @@ def handle_game_request(key=None, value=None):
             # After 5 attempts just end
             return None
     return resp
-
-
-def record_login(time, user_id, email):
-    """ Records a login to the Google Datastore"""
-    entity = datastore.Entity(key=datastore_client.key('login'))
-    entity.update({
-        'timestamp': time,
-        'user_id': user_id,
-        'email': email
-    })
-    datastore_client.put(entity)
 
 
 def fetch_times(limit):

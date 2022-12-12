@@ -122,7 +122,15 @@ auth.onAuthStateChanged(user => {
         // Add the token to the browser's cookies. The server will then be
         // able to verify the token against the API.
         document.cookie = "token=" + token + "; path=/";
-        let url = window.location.href.slice(0, -5); // Remove login from end of url
+        let xhr = new XMLHttpRequest();
+        let url = window.location.href.split("login")[0];
+        xhr.open("POST", `${url}/record` );
+        xhr.setRequestHeader("Accept", "application/json");
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.send(`
+        {"type": "login"}`
+      );
+        url = window.location.href.slice(0, -5); // Remove login from end of url
         location.href = url + '/store'; // User's logged in, now load the store
     }); 
   } else {
