@@ -24,18 +24,18 @@
   <body class="body">
     {% block body %}
     <!-- header -->
-    <header class="ds-header">
+    <header class="header">
       <div class="container" style="display: flex; flex-direction: row;">
-        <div class="ds-logo" style="padding-right: 5px">
+        <div class="banner-button" style="padding-right: 5px">
           <a href="{{ url_for('store') }}">Home</a>
         </div>
-        <div class="ds-logo" style="padding-right: 5px;">
+        <div class="banner-button" style="padding-right: 5px;">
           <a href="{{ url_for('signup') }}" id="signup-btn">Sign Up</a>
         </div>
-          <div class="ds-logo">
+          <div class="banner-button">
             <a href="{{ url_for('login') }}" id="login-btn">Login</a>
           </div>
-          <div class="ds-logo" id="logout-btn">
+          <div class="banner-button" id="logout-btn">
             <a href="">Logout</a>
           </div>
       </div>
@@ -43,11 +43,11 @@
     </div>
     </header>
     <!-- Banner Section -->
-    <section class="ds-banner">
+    <section class="banner">
       <div class="container">
         <div class="row">
-          <div class="col-12 col-sm-12  col-md-6  col-lg-7  col-xl-7  col-xxl-7 ds-banner-left">
-              <h1 id="gametitle" class="ds-banner-hed">
+          <div class="col-12 col-sm-12  col-md-6  col-lg-7  col-xl-7  col-xxl-7 banner-left">
+              <h1 id="gametitle" class="banner-hed">
                 {{game['name']}}
               </h1>
 
@@ -62,7 +62,7 @@
       </div>
     </section>
     <!-- Game Section -->
-    <section class="ds-resume-section">
+    <section class="game-section">
       <div class="container">
         <div class="row">
           <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
@@ -70,12 +70,22 @@
           </div>
           <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
             <p id="gamedesc">{{game['desc_long']}}</p>
-            <a href="#" class="ds-download-button">Purchase Game<i class="ri-download-line"></i></a>
-            <a id="remove-game" href="#" class="ds-download-button">Remove Game<i class="ri-close-circle-line"></i></a>
+            <a href="#" class="action-button">Purchase Game<i class="ri-download-line"></i></a>
+            <a id="remove-game" href="#" class="action-button">Remove Game<i class="ri-close-circle-line"></i></a>
           </div>
         </div>
       </div>
     </section>
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <a href="mailto:contact@zogs.com">contact@zogs.com</a>
+        <br />
+        <a href="tel:+447421469419">+44 7421469419</a>
+        <br /> <br />
+        <span class="ds-copyright">© 2022 All right reserved.</span>
+      </div>
+    </footer>
 {% endblock %}
 </body>
 <!-- Scripts -->

@@ -27,25 +27,25 @@
   <body class="body">
     
     <!-- header -->
-    <header class="ds-header">
+    <header class="header">
       <div class="container" style="display: flex; flex-direction: row;">
-        <div class="ds-logo" style="padding-right: 5px;">
+        <div class="banner-button" style="padding-right: 5px;">
           <a href="{{ url_for('signup') }}" id="signup-btn">Sign Up</a>
         </div>
-          <div class="ds-logo" id="login-btn">
+          <div class="banner-button" id="login-btn">
             <a href="{{ url_for('login') }}">Login</a>
           </div>
-          <div class="ds-logo" id="logout-btn">
+          <div class="banner-button" id="logout-btn">
           <a href="">Logout</a>
         </div>
       </div>
     </header>
     <!-- Banner Section -->
-    <section class="ds-banner">
+    <section class="banner">
       <div class="container">
         <div class="row">
-          <div class="col-12 col-sm-12  col-md-6  col-lg-7  col-xl-7  col-xxl-7 ds-banner-left">
-              <h1 class="ds-banner-hed">
+          <div class="col-12 col-sm-12  col-md-6  col-lg-7  col-xl-7  col-xxl-7 banner-left">
+              <h1 class="banner-hed">
                 Zak's Online Gaming Store [ZOGS]
               </h1>
 
@@ -59,15 +59,15 @@
       </div>
     </section>
     <!-- Games Section -->
-    <section class="ds-projects-section">
+    <section class="games-section">
       <div class="container">
           <h2><span>Games</span> </h2>
-          <div class="row ds-projects-listing-section">
+          <div class="row game-listing-setion">
             {% for item in items %}
-            <div style="padding-bottom: 20px"class="col-12 col-sm-12  col-md-4  col-lg-4  col-xl-4  col-xxl-4 ds-projects-loop">
+            <div style="padding-bottom: 20px"class="col-12 col-sm-12  col-md-4  col-lg-4  col-xl-4  col-xxl-4 game-loop">
                 <figure>
                   <a href="{{item['id_']}}" class="ds-link-button"><i class="ri-external-link-line"></i></a>
-                  <img src="{{item['image']}}"" class="ds-image-shadow transition">
+                  <img src="{{item['image']}}"" class="image-shadow transition">
                 </figure>
                 <section>
                   <h3>{{item['name']}}</h3>
@@ -79,12 +79,12 @@
       </div>
     </section>
     <!-- Admin Section -->
-    <section hidden id="admin" class="ds-resume-section">
+    <section hidden id="admin" class="game-section">
       <div class="container">
           <div class="row">
               <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
                 <h2>Admin:</h2>
-                <a id="add-game" class="ds-download-button">Add Game<i class="ri-add-circle-line"></i></a>
+                <a id="add-game" class="action-button">Add Game<i class="ri-add-circle-line"></i></a>
               </div>
               <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
                 <p id="logininfo"></p>
@@ -95,7 +95,7 @@
       </div>
     </section>
     <!-- Footer -->
-    <footer class="ds-footer">
+    <footer class="footer">
       <div class="container">
         <a href="mailto:contact@zogs.com">contact@zogs.com</a>
         <br />
