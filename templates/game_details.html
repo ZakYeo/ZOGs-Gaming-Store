@@ -79,6 +79,24 @@
         </div>
       </div>
     </section>
+    {% if achievements|length > 1 %}
+    <section class="game-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
+            <h2 id="gameprice" class="price" style="font-size: 100px !important;">Achievements</h2>
+          </div>
+           
+          <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
+            {% for achievement in achievements %}
+            <p id="gamedesc">{{ achievement["name"] }} achieved by %{{ achievement["percent"] }}</p>
+            {% endfor %}
+          </div>
+          
+        </div>
+      </div>
+    </section>
+    {% endif %}
     <!-- Footer -->
     <footer class="footer">
       <div class="container">

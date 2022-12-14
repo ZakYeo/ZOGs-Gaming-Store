@@ -28,7 +28,7 @@ def store(game):
             If no game is given, or the value of game is invalid, will return the root store
 
     Returns:
-    Returns either the main_store_page or game_details html pages for rendering            
+    Returns either the main_store_page or game_details html pages for rendering
     """
 
     if not game:  # Render all games
@@ -56,8 +56,17 @@ def store(game):
             remove_game(game)
 
             return (resp.json(), resp.status_code)  # Return response
+
+        # Get achievements for game
+        try:
+            achievements = get_steam_achievements(resp.json()["1"]["steamid"])
+            if (len(achievements) > 7):
+                # Limit to hardest 7 achievements
+                achievements = achievements[:7]
+        except KeyError:
+            achievements = []
         # Now render game
-        return render_template("game_details.html", game=resp.json()["1"])
+        return render_template("game_details.html", game=resp.json()["1"], achievements=achievements)
 
 
 @ app.route("/")
@@ -101,8 +110,8 @@ def admin():
     It does this by verifying the user's token cookie and checking against the database
 
     Returns:
-        1 or 0 for administrator or not   
-        HTTP status code 200 if successful        
+        1 or 0 for administrator or not
+        HTTP status code 200 if successful
     """
 
     claims = check_firebase_login(request.cookies.get("token"))
@@ -126,7 +135,7 @@ def times(limit):
 
     Returns:
         json object of the recent Google Datastore activity
-        HTTP status code 200 if successful       
+        HTTP status code 200 if successful
     """
     return (fetch_times(limit), 200)
 
@@ -155,7 +164,7 @@ def handle_game_request(key=None, value=None):
     If the connection was unsuccessful (password change, data corruption, connection unavailable etc),
     then it will attempt to access the secondary backup database from Firebase's Realtime Database
 
-    Uses exponential backoff at a rate of 2^attempts 
+    Uses exponential backoff at a rate of 2^attempts
     and retries both databases if they both return unsuccessful
     At 5 attempts, will give up
 
@@ -164,7 +173,7 @@ def handle_game_request(key=None, value=None):
         value -- The value of the data to query (used to narrow search)
 
     Returns:
-        HTTP response containing json response and HTTP status code       
+        HTTP response containing json response and HTTP status code
     """
     code = 503
     attempts = 0
@@ -299,6 +308,19 @@ def get_all_games(db, key=None, value=None):
     resp = requests.get(url)
 
     return resp
+
+
+def get_steam_achievements(app_id):
+
+    url = f"https://api.steampowered.com/ISteamUserStats/GetGlobalAchievementPercentagesForApp/v0002/?gameid={app_id}&format=json"
+
+    resp = requests.get(url)
+
+    if resp.status_code == 200:
+        achievements = resp.json()["achievementpercentages"]["achievements"]
+
+    return (sorted(achievements, key=lambda achievement: int(
+        achievement["percent"])))
 
 
 if __name__ == '__main__':
