@@ -28,6 +28,7 @@ logoutBtn.addEventListener('click', e => {
   auth.signOut();
 })
 
+
 auth.onAuthStateChanged(user => {
   if (user) {
     document.querySelector('#logout-btn').hidden = false;
@@ -37,6 +38,7 @@ auth.onAuthStateChanged(user => {
       // able to verify the token against the API.
       document.cookie = "token=" + token + "; path=/";
       enable_edit();
+      document.querySelector('#purchase-game').hidden = false;
     });
   } else {
     document.querySelector('#logout-btn').hidden = true;
@@ -47,6 +49,7 @@ auth.onAuthStateChanged(user => {
     document.querySelector('#gameprice').contentEditable = false;
     document.querySelector('#upload').hidden = true;
     document.getElementById("remove-game").hidden = true;
+    document.querySelector('#purchase-game').hidden = true;
   }
 });
 
