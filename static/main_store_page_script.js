@@ -1,9 +1,3 @@
-
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
-// For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
     apiKey: "AIzaSyAopZxjnk3TnQMPg9NUouUvC6aIsvtDCyo",
     authDomain: "ad-2021-03.firebaseapp.com",
@@ -12,67 +6,55 @@ const firebaseConfig = {
     messagingSenderId: "243759511961",
     appId: "1:243759511961:web:8e19eab1cbf743c9d27b08",
     measurementId: "G-FKJT5126NC"
-    };
-
-
-    // Initialize Firebase
-    // Initialize Firebase
+};
+// Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 const auth = firebase.auth();
-console.log(firebase);
 
-    const logoutBtn = document.querySelector('#logout-btn');
+const logoutBtn = document.querySelector('#logout-btn');
 logoutBtn.addEventListener('click', e => {
-e.preventDefault();
-auth.signOut();
-console.log('User signed out!');
+    e.preventDefault();
+    auth.signOut();
 })
 
 auth.onAuthStateChanged(user => {
-if (user) {
-console.log(user.email + " is logged in!");
-document.querySelector('#logout-btn').hidden = false;
-document.querySelector('#login-btn').hidden = true;
-user.getIdToken().then(function (token) {
-        // Add the token to the browser's cookies. The server will then be
-        // able to verify the token against the API.
-        document.cookie = "token=" + token + "; path=/";
-        let xhr = new XMLHttpRequest();
-        let url = window.location.href.split("store")[0];
-        xhr.open("GET", `${url}/admin` );
-        xhr.setRequestHeader("Accept", "application/json");
-        xhr.setRequestHeader("Content-Type", "application/json");
-        
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {
-            resp = JSON.parse(xhr.responseText);
-                if(resp["administrator"] === 1){
-                document.querySelector('#admin').hidden = false;
-                document.querySelector('#add-game').href = `${window.location.href.split("store")[0]}add`;
-                render_analytics();
-                }
-            }};
-            xhr.send();
+    if (user) {
+        document.querySelector('#logout-btn').hidden = false;
+        document.querySelector('#login-btn').hidden = true;
+        user.getIdToken().then(function (token) {
+            // Add the token to the browser's cookies. The server will then be
+            // able to verify the token against the API.
+            document.cookie = "token=" + token + "; path=/";
+            let xhr = new XMLHttpRequest();
+            let url = window.location.href.split("store")[0];
+            xhr.open("GET", `${url}/admin` );
+            xhr.setRequestHeader("Accept", "application/json");
+            xhr.setRequestHeader("Content-Type", "application/json");
             
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {
+                resp = JSON.parse(xhr.responseText);
+                    if(resp["administrator"] === 1){
+                        document.querySelector('#admin').hidden = false;
+                        document.querySelector('#add-game').href = `${window.location.href.split("store")[0]}add`;
+                        render_analytics();
+                    }
+                }};
+            xhr.send();
+        });
 
-    });
-
-
-} else {
-console.log('User is logged out!');
-document.querySelector('#logout-btn').hidden = true;
-document.querySelector('#login-btn').hidden = false;
-document.querySelector('#admin').hidden = true;
-document.cookie = "token=" + "; path=/";
-console.log(document.cookie);
-}
+    } else {
+        document.querySelector('#logout-btn').hidden = true;
+        document.querySelector('#login-btn').hidden = false;
+        document.querySelector('#admin').hidden = true;
+        document.cookie = "token=" + "; path=/";
+    }
 });
 
 function render_analytics() {
     let xhr = new XMLHttpRequest();
     let url = window.location.href.split("store")[0];
-    console.log(url);
     xhr.open("GET", `${url}/times/10` );
     xhr.setRequestHeader("Accept", "application/json");
     xhr.setRequestHeader("Content-Type", "application/json");
@@ -81,10 +63,8 @@ function render_analytics() {
     if (xhr.readyState === 4) {
         resp = JSON.parse(xhr.responseText);
         str = "";
-        console.log(resp.length);
         for(let i=0; i< Object.keys(resp).length; i++){
         str += `${resp[i].timestamp}: ${resp[i].email}\n`
-        console.log(str);
         }
         document.querySelector('#logininfo').innerText = str;
         
