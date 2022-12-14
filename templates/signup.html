@@ -29,7 +29,7 @@
     <div class="login">
       <div class="login-screen">
         <div class="app-title">
-          <h1>Login</h1>
+          <h1>Sign Up</h1>
         </div>
         <div class="login-form">
           <div class="control-group">
@@ -39,7 +39,7 @@
           <div class="control-group">
             <input id="password" type="password" class="login-field" value="" placeholder="password" name="password">
             <label class="login-field-icon fui-lock" for="login-pass"></label></div>
-            <input id="login-btn" type="submit" value="Log In" class="btn btn-large btn-block">
+            <input id="signup-btn" type="submit" value="Sign Up" class="btn btn-large btn-block">
           </div>
           <div id="firebaseui-auth-container"></div>
         </div>
@@ -52,5 +52,5 @@
     <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.9.0/firebase-analytics.js"></script>
-    <script src="{{ url_for('static', filename='login_script.js') }}"></script> 
+    <script src="{{ url_for('static', filename='signup_script.js') }}"></script> 
 </html>

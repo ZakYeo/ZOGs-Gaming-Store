@@ -80,6 +80,13 @@ def login():
     return render_template('login.html')
 
 
+@ app.route('/signup', methods=['GET'])
+@ app.route('/signup/')
+def signup():
+    """Renders the login.html at this endpoint"""
+    return render_template('signup.html')
+
+
 @ app.route("/admin/", methods=["GET"])
 def admin():
     """ Endpoint to check if a user has administrative permissions or not
