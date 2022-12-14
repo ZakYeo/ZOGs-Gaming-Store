@@ -22,19 +22,6 @@ firebase.initializeApp(firebaseConfig);
 firebase.analytics();
 const auth = firebase.auth();
 
-// https://dev.to/maasak/sign-up-login-logout-users-with-firebase-authentication-3oa9
-const signupBtn = document.querySelector('#signup-btn');
-  signupBtn.addEventListener('click', e => {
-  e.preventDefault();
-
-  const email = document.querySelector('#email').value;
-  const password = document.querySelector('#password').value;
-
-  auth.createUserWithEmailAndPassword(email, password).then(cred => {
-    alert('User signed up!');
-  });
-});
-
 
 const loginBtn = document.querySelector('#login-btn');
   loginBtn.addEventListener('click', e => {
@@ -65,8 +52,7 @@ auth.onAuthStateChanged(user => {
         xhr.send(`
         {"type": "login"}`
       );
-        url = window.location.href.slice(0, -5); // Remove login from end of url
-        location.href = url + '/store'; // User's logged in, now load the store
+        location.href = window.location.origin + '/store'; // User's logged in, now load the store
     }); 
   } else {
     var ui = new firebaseui.auth.AuthUI(firebase.auth());
