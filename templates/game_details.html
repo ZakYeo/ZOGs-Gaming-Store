@@ -68,6 +68,7 @@
           <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
             <p id="gamedesc">{{game['desc_long']}}</p>
             <a href="#" class="ds-download-button">Purchase Game<i class="ri-download-line"></i></a>
+            <a id="remove-game" href="#" class="ds-download-button">Remove Game<i class="ri-close-circle-line"></i></a>
           </div>
         </div>
       </div>
@@ -182,6 +183,23 @@ document.getElementById("gamedesc").addEventListener('blur', (event) => {
     send_post_request("desc_long", event.srcElement.innerText);
   }
 });
+
+document.getElementById("remove-game").addEventListener('click', () => {
+  const url = `${window.location.href}delete/`;
+  let xhr = new XMLHttpRequest();
+  console.log(url);
+  xhr.open("POST", url );
+  xhr.setRequestHeader("Accept", "application/json");
+  xhr.setRequestHeader("Content-Type", "application/json");
+  xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4) {
+            alert(xhr.responseText);
+            location.reload();
+        }};
+  xhr.send();
+});
+
+
 
 function send_post_request(new_key, new_value) {
   let xhr = new XMLHttpRequest();

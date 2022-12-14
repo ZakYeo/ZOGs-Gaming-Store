@@ -18,6 +18,7 @@ Bootstrap5(app)
 @app.route("/store/", defaults={"game": ""})
 @app.route("/store/<game>/")
 @app.route("/store/<game>/update/", methods=['POST'])
+@app.route("/store/<game>/delete/", methods=['POST'])
 def store(game):
     """ Root page for the Online GameStore
 
@@ -45,14 +46,12 @@ def store(game):
         if(resp is None or len(resp.json()) == 0):  # Game not found
             return redirect(url_for("store"))
 
-        if request.method == 'POST':  # Admin is updating game via POST
+        if request.method == 'POST' and 'update' in request.path:  # Admin is updating game via POST
             json = request.get_json()
-            filter_key = json["filter_key"]
-            filter_value = json["filter_value"]
-            new_key = json["new_key"]
-            new_value = json["new_value"]
-            resp = update_game(request.cookies.get("token"), filter_key,
-                               filter_value, new_key, new_value)
+            resp = update_game(request.cookies.get("token"), json["filter_key"],
+                               json["filter_value"], json["new_key"], json["new_value"])
+        elif request.method == 'POST' and 'delete' in request.path:
+            remove_game(game)
 
             return (resp.json(), resp.status_code)  # Return response
         # Now render game
@@ -63,6 +62,15 @@ def store(game):
 def home():
     """Redirect root routing to the store page at this endpoint"""
     return redirect(url_for("store"))
+
+
+@app.route("/add")
+@app.route("/add/")
+def add():
+    resp = add_game("Coming Soon", 0.00)
+    print(resp.json())
+    if resp.status_code == 200:
+        return redirect(url_for(f"store"))
 
 
 @ app.route('/login', methods=['GET'])
@@ -202,6 +210,22 @@ def check_firebase_login(token=""):
         return resp.json()
     else:
         return None
+
+
+def add_game(name, price):
+    url = f"{BASE_URL}/add-game?name={name}&price={price}"
+
+    resp = requests.get(url)
+
+    return resp
+
+
+def remove_game(id_):
+    url = f"{BASE_URL}/remove-game?id_={id_}"
+
+    resp = requests.get(url)
+
+    return resp
 
 
 def update_game(token=None, filter_key=None, filter_value=None, new_key=None, new_value=None):

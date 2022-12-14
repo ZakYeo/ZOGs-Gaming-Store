@@ -80,11 +80,14 @@
       <div class="container">
           <div class="row">
               <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
-                <h2>Logins:</h2>
+                <h2>Admin:</h2>
+                <a id="add-game" class="ds-download-button">Add Game<i class="ri-add-circle-line"></i></a>
               </div>
               <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
                 <p id="logininfo"></p>
+                
               </div>
+              
           </div>
       </div>
     </section>
@@ -157,6 +160,7 @@ user.getIdToken().then(function (token) {
             resp = JSON.parse(xhr.responseText);
               if(resp["administrator"] === 1){
                 document.querySelector('#admin').hidden = false;
+                document.querySelector('#add-game').href = `${window.location.href.split("store")[0]}add`;
                 render_analytics();
               }
           }};
