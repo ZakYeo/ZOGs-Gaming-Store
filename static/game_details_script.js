@@ -46,6 +46,7 @@ auth.onAuthStateChanged(user => {
     document.querySelector('#gamedesc').contentEditable = false;
     document.querySelector('#gameprice').contentEditable = false;
     document.querySelector('#upload').hidden = true;
+    document.getElementById("remove-game").hidden = true;
   }
 });
 
@@ -142,6 +143,7 @@ function enable_edit(){
               document.querySelector('#gamedesc').contentEditable = true;
               document.querySelector('#gameprice').contentEditable = true;
               document.querySelector('#upload').hidden = false;
+              document.getElementById("remove-game").hidden = false;
         }
     }};
     xhr.send();
