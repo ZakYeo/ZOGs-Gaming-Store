@@ -32,13 +32,8 @@ const firebaseConfig = {
   
     auth.createUserWithEmailAndPassword(email, password).then(cred => {
       alert('User signed up!');
-      /*auth.signInWithEmailAndPassword(email, password)
-      .then(cred => {
-        console.log('Logged in user!');
-      })
-      .catch(error => {
-        alert(error.message);
-      })*/
+    }).catch(error => {
+      alert(error.message);
     });
   });
   
