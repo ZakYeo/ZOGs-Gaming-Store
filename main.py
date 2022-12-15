@@ -106,7 +106,10 @@ def about():
 @ app.route("/profile")
 @ app.route("/profile/")
 def profile():
-    return render_template("profile.html", username=check_firebase_login(request.cookies.get("token"))["email"])
+    try:
+        return render_template("profile.html", username=check_firebase_login(request.cookies.get("token"))["email"])
+    except TypeError:
+        return redirect(url_for(f"store"))
 
 
 @ app.route("/admin/", methods=["GET"])
