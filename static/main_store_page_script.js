@@ -23,6 +23,8 @@ auth.onAuthStateChanged(user => {
         document.querySelector('#logout-btn').hidden = false;
         document.querySelector('#login-btn').hidden = true;
         document.querySelector('#profile-section').hidden = false;
+        document.querySelector('#signup-btn').hidden = true;
+        document.querySelector('#profile-btn').hidden = false;
         user.getIdToken().then(function (token) {
             // Add the token to the browser's cookies. The server will then be
             // able to verify the token against the API.
@@ -50,6 +52,8 @@ auth.onAuthStateChanged(user => {
         document.querySelector('#login-btn').hidden = false;
         document.querySelector('#admin').hidden = true;
         document.querySelector('#profile-section').hidden = true;
+        document.querySelector('#signup-btn').hidden = false;
+        document.querySelector('#profile-btn').hidden = true;
         document.cookie = "token=" + "; path=/";
     }
 });

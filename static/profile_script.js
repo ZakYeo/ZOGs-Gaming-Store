@@ -22,7 +22,6 @@ auth.onAuthStateChanged(user => {
     if (user) {
         document.querySelector('#logout-btn').hidden = false;
         document.querySelector('#login-btn').hidden = true;
-        document.querySelector('#profile-section').hidden = false;
         document.querySelector('#signup-btn').hidden = true;
         user.getIdToken().then(function (token) {
             // Add the token to the browser's cookies. The server will then be
@@ -31,11 +30,8 @@ auth.onAuthStateChanged(user => {
         });
 
     } else {
-        document.querySelector('#login-btn').hidden = false;
-        console.log("user is logged out");
         document.querySelector('#logout-btn').hidden = true;
         document.querySelector('#login-btn').hidden = false;
-        document.querySelector('#profile-section').hidden = true;
         document.querySelector('#signup-btn').hidden = false;
         document.cookie = "token=" + "; path=/";
     }

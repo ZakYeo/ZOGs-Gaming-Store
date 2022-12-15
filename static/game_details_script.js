@@ -33,6 +33,7 @@ auth.onAuthStateChanged(user => {
   if (user) {
     document.querySelector('#logout-btn').hidden = false;
     document.querySelector('#login-btn').hidden = true;
+    document.querySelector('#signup-btn').hidden = true;
     document.querySelector('#profile-section').hidden = false;
     user.getIdToken().then(function (token) {
       // Add the token to the browser's cookies. The server will then be
@@ -44,6 +45,7 @@ auth.onAuthStateChanged(user => {
   } else {
     document.querySelector('#logout-btn').hidden = true;
     document.querySelector('#login-btn').hidden = false;
+    document.querySelector('#signup-btn').hidden = false;
     document.cookie = "token=" + "; path=/";
     document.querySelector('#gametitle').contentEditable = false;
     document.querySelector('#gamedesc').contentEditable = false;
