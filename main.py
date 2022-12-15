@@ -50,8 +50,7 @@ def store(game):
             json = request.get_json()
             resp = update_game(request.cookies.get("token"), json["filter_key"],
                                json["filter_value"], json["new_key"], json["new_value"])
-            if resp.status_code != 200:
-                return (resp.json(), resp.status_code)
+            return (resp.json(), resp.status_code)
         elif request.method == 'POST' and 'delete' in request.path:
             remove_game(game)
 
