@@ -103,6 +103,12 @@ def about():
     return render_template("about.html")
 
 
+@ app.route("/profile")
+@ app.route("/profile/")
+def profile():
+    return render_template("profile.html", username=check_firebase_login(request.cookies.get("token"))["email"])
+
+
 @ app.route("/admin/", methods=["GET"])
 def admin():
     """ Endpoint to check if a user has administrative permissions or not

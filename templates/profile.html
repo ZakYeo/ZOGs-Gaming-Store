@@ -29,9 +29,6 @@
         <div class="banner-button" style="padding-right: 5px">
           <a href="{{ url_for('store') }}">Home</a>
         </div>
-        <div class="banner-button" style="padding-right: 5px">
-          <a href="{{ url_for('about') }}">About</a>
-        </div>
         <div class="banner-button" style="padding-right: 5px;">
           <a href="{{ url_for('signup') }}" id="signup-btn">Sign Up</a>
         </div>
@@ -42,66 +39,31 @@
             <a href="">Logout</a>
           </div>
       </div>
+      
     </div>
-    <div hidden id="profile-section" class="container" style="display: flex; flex-direction: row-reverse;">
-      <div class="banner-button" style="padding-right: 5px">
-        <div class="banner-button" id="profile-btn">
-          <a href="{{ url_for('profile') }}">Profile</a>
-        </div>
-      </div></div>
     </header>
     <!-- Banner Section -->
-    <section class="banner">
-      <div class="container">
-        <div class="row">
-          <div class="col-12 col-sm-12  col-md-6  col-lg-7  col-xl-7  col-xxl-7 banner-left">
-              <h1 id="gametitle" class="banner-hed">
-                {{game['name']}}
-              </h1>
+    <!-- Banner Section -->
+    <section class="banner" style="background-color: black;padding-top: 15px;margin-bottom: 50px;">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-sm-12  col-md-6  col-lg-7  col-xl-7  col-xxl-7 banner-left">
+                <h1 class="banner-hed">
+                  {{ username }}
+                </h1>
+                <br><br><br>
+                <p>Profile customization coming soon. Stay tuned.</p>
+  
+            </div>
+            <div class="col-12 col-sm-12  col-md-6  col-lg-5  col-xl-5  col-xxl-5">
+              <figure>
+                <img src="https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/dpc/portrait_guidelines/example-player-silhouette.jpg">
+              </figure>
+            </div>
+          </div>
+        </div>
+      </section>
 
-          </div>
-          <div class="col-12 col-sm-12  col-md-6  col-lg-5  col-xl-5  col-xxl-5">
-            <figure>
-              <button hidden id="upload" style="opacity: 1;" class="ds-link-button"><i class="ri-upload-2-fill"></i></button>
-              <img id="uploadedimage" src="{{game['image']}}">
-            </figure>
-          </div>
-        </div>
-      </div>
-    </section>
-    <!-- Game Section -->
-    <section class="game-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
-            <h2 id="gameprice" class="price">£{{game['price']}}</h2>
-          </div>
-          <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
-            <p id="gamedesc">{{game['desc_long']}}</p>
-            <a href="" id="purchase-game" hidden class="action-button">Purchase Game<i class="ri-download-line"></i></a>
-            <a id="remove-game" hidden href="#" class="action-button">Remove Game<i class="ri-close-circle-line"></i></a>
-          </div>
-        </div>
-      </div>
-    </section>
-    {% if achievements|length > 1 %}
-    <section class="game-section">
-      <div class="container">
-        <div class="row">
-          <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
-            <h2 id="gameprice" class="price" style="font-size: 100px !important;">Achievements</h2>
-          </div>
-           
-          <div class="col-12 col-sm-12  col-md-6  col-lg-6  col-xl-6  col-xxl-6">
-            {% for achievement in achievements %}
-            <p id="gamedesc">{{ achievement["name"] }} achieved by %{{ achievement["percent"] }}</p>
-            {% endfor %}
-          </div>
-          
-        </div>
-      </div>
-    </section>
-    {% endif %}
     <!-- Footer -->
     <footer class="footer">
       <div class="container">
@@ -121,7 +83,7 @@
 <!-- Cloudinary API -->
 <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
 
-<script src="{{ url_for('static', filename='game_details_script.js') }}"></script> 
+<script src="{{ url_for('static', filename='about_script.js') }}"></script> 
 <script>
 </script>
 </html>

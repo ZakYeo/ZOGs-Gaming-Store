@@ -22,6 +22,7 @@ auth.onAuthStateChanged(user => {
     if (user) {
         document.querySelector('#logout-btn').hidden = false;
         document.querySelector('#login-btn').hidden = true;
+        document.querySelector('#profile-section').hidden = false;
         user.getIdToken().then(function (token) {
             // Add the token to the browser's cookies. The server will then be
             // able to verify the token against the API.
@@ -31,6 +32,7 @@ auth.onAuthStateChanged(user => {
     } else {
         document.querySelector('#logout-btn').hidden = true;
         document.querySelector('#login-btn').hidden = false;
+        document.querySelector('#profile-section').hidden = true;
         document.cookie = "token=" + "; path=/";
     }
 });
