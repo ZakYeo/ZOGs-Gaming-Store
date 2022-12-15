@@ -63,7 +63,6 @@ const myWidget = cloudinary.createUploadWidget(
     cloudName: CLOUD_NAME,
     uploadPreset: UPLOAD_PRESET,
     multiple: false,  //restrict upload to a single file
-    clientAllowedFormats: ["images"], //restrict uploading to image files only
   },
   (error, result) => {
     if (!error && result && result.event === "success") {
