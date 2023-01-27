@@ -1,0 +1,4 @@
+# Function dependencies, for example:
+# package>=version
+google-auth==1.31.0
+requests==2.21.0
