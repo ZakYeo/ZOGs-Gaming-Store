@@ -1,7 +1,9 @@
-# advanced-development-assignment-ZakYeo
+# ZOGS-Gaming-Store
 Online GameStore built using Python's Flask library for a backend with HTML,CSS & JavaScript for the frontend. Pulls a list of games from a Database (MongoDB or Firebase RealtimeDB) to dynamically display on the webpage. The games' information is modifiable by administrator accounts marked in the databas. Administrators can also add or remove games entirely and view the "logs" of the website. 
 
 The app interacts with the Cloudinary API to handle the saving of images in a database, and uses the Steam API to view the top achievements of the game selected.
+
+This app was a project written during my final year at University and scored me 94 / 100
 
 ## How To Run
 - Setup a MongoDB & Firebase Authentication with Realtime DB
