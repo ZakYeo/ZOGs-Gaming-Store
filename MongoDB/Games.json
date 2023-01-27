@@ -1,0 +1,100 @@
+[{
+  "_id": {
+    "$oid": "6388a9af2fe1d308a4379840"
+  },
+  "id_": 0,
+  "name": "Dragonball: The Breakers 2",
+  "image": "https://res.cloudinary.com/dhujezr6s/image/upload/v1671103439/db_breakers_oouzrw.jpg",
+  "price": 14.99,
+  "desc_brief": "Online asymmetrical action game in which a band of 7 ordinary citizens tries to survive the Raider (a classic DRAGON BALL rival such as Cell, Frieza, and Buu), who will hunt and evolve into an unstoppable force!",
+  "desc_long": "DRAGON BALL: THE BREAKERS is an online asymmetrical action game in which a team of 7 ordinary citizens tries to survive the Raider (a classic DRAGON BALL rival such as Cell, Frieza, and Buu), who will hunt them down and evolve during the game into an unstoppable force. Escaping won’t be so easy! aaaa",
+  "steamid": 1276760
+},{
+  "_id": {
+    "$oid": "6389f9a82fe1d308a4379845"
+  },
+  "name": "Spider-Man Remastered",
+  "price": 46,
+  "image": "https://res.cloudinary.com/dhujezr6s/image/upload/v1671103440/spiderman_cyzuqt.jpg",
+  "id_": 2,
+  "desc_brief": "The worlds of Peter Parker and Spider-Man collide in an original action-packed story. Play as an experienced Peter Parker, fighting big crime and iconic villains in Marvel’s New York.",
+  "desc_long": "Developed by Insomniac Games in collaboration with Marvel, and optimized for PC by Nixxes Software, Marvel's Spider-Man Remastered on PC introduces an experienced Peter Parker who’s fighting big crime and iconic villains in Marvel’s New York. At the same time, he’s struggling to balance his chaotic personal life and career while the fate of Marvel’s New York rests upon his shoulders.",
+  "steamid": 1817070
+},{
+  "_id": {
+    "$oid": "638b582ccde3abf0ec3ff942"
+  },
+  "name": "Dragonball FighterZ",
+  "price": 19,
+  "image": "https://res.cloudinary.com/dhujezr6s/image/upload/v1671103439/dbfz_yustzj.jpg",
+  "id_": 3,
+  "desc_brief": "Born from what makes the DRAGON BALL series so loved and famous: endless spectacular fights with its all-powerful fighters.",
+  "desc_long": "Born from what makes the DRAGON BALL series so loved and famous: endless spectacular fights with its all-powerful fighters.",
+  "steamid": 678950
+},{
+  "_id": {
+    "$oid": "638b5844cde3abf0ec3ff943"
+  },
+  "name": "Cuphead",
+  "price": 7.99,
+  "image": "https://res.cloudinary.com/dhujezr6s/image/upload/v1671103439/cuphead_g354vl.jpg",
+  "id_": 4,
+  "desc_brief": "Classic run and gun action game heavily focused on boss battles. Inspired by cartoons of the 1930s, the visuals and audio are painstakingly created with the same techniques of the era, i.e. traditional hand drawn cel animation, watercolor backgrounds, and original jazz recordings.",
+  "desc_long": "Cuphead is a classic run and gun action game heavily focused on boss battles. Inspired by cartoons of the 1930s, the visuals and audio are painstakingly created with the same techniques of the era, i.e. traditional hand drawn cel animation, watercolor backgrounds, and original jazz recordings.\n\nPlay as Cuphead or Mugman (in single player or local co-op) as you traverse strange worlds, acquire new weapons, learn powerful super moves, and discover hidden secrets while you try to pay your debt back to the devil!",
+  "steamid": 268910
+},{
+  "_id": {
+    "$oid": "638b5856cde3abf0ec3ff944"
+  },
+  "name": "Destiny",
+  "price": 7.99,
+  "image": "https://res.cloudinary.com/dhujezr6s/image/upload/v1671103439/destiny2_zt9wij.jpg",
+  "id_": 5,
+  "desc_brief": "Destiny 2 is an action MMO with a single evolving world that you and your friends can join anytime, anywhere.",
+  "desc_long": "Dive into the world of Destiny 2 to explore the mysteries of the solar system and experience responsive first-person shooter combat. Unlock powerful elemental abilities and collect unique gear to customize your Guardian's look and playstyle. Enjoy Destiny 2’s cinematic story, challenging co-op missions, and a variety of PvP modes alone or with friends. Download for free today and write your legend in the stars.",
+  "steamid": 1085660
+},{
+  "_id": {
+    "$oid": "638b5869cde3abf0ec3ff945"
+  },
+  "name": "God Of War",
+  "price": 7.99,
+  "image": "https://res.cloudinary.com/dhujezr6s/image/upload/v1671103440/gow_ir2mdz.jpg",
+  "id_": 6,
+  "desc_brief": "His vengeance against the Gods of Olympus years behind him, Kratos now lives as a man in the realm of Norse Gods and monsters. It is in this harsh, unforgiving world that he must fight to survive… and teach his son to do the same.",
+  "desc_long": "Enter the Norse realm\nHis vengeance against the Gods of Olympus years behind him, Kratos now lives as a man in the realm of Norse Gods and monsters. It is in this harsh, unforgiving world that he must fight to survive… and teach his son to do the same.\n\nGrasp a second chance\nKratos is a father again. As mentor and protector to Atreus, a son determined to earn his respect, he is forced to deal with and control the rage that has long defined him while out in a very dangerous world with his son.",
+  "steamid": 1593500
+},{
+  "_id": {
+    "$oid": "638b5889cde3abf0ec3ff946"
+  },
+  "name": "Crash Bandicoot 4 It's About Time",
+  "price": 6.99,
+  "image": "https://res.cloudinary.com/dhujezr6s/image/upload/v1671103439/crash_lxzruy.jpg",
+  "id_": 7,
+  "desc_brief": "\nIt’s About Time - the critically-acclaimed Crash Bandicoot™ 4: It's About Time is now on Steam!",
+  "desc_long": "It’s About Time - the critically-acclaimed Crash Bandicoot™ 4: It's About Time is now on Steam! Crash fourward into a time shattered adventure with your favorite marsupials.\n\nNeo Cortex and N. Tropy are back at it again and launching an all-out assault on not just this universe, but the entire multiverse! Crash and Coco are here to save the day by reuniting the four Quantum Masks and bending the rules of reality.\n",
+  "steamid": 1378990
+},{
+  "_id": {
+    "$oid": "638b58a1cde3abf0ec3ff947"
+  },
+  "name": "Fifa 22",
+  "price": 49.99,
+  "image": "https://res.cloudinary.com/dhujezr6s/image/upload/v1671103439/fifa22_x5fn8y.jpg",
+  "id_": 8,
+  "desc_brief": "Powered by Football™, EA SPORTS™ FIFA 22 brings the game even closer to the real thing with fundamental gameplay advances and a new season of innovation across every mode.",
+  "desc_long": "Powered by Football™, EA SPORTS™ FIFA 22 brings the game even closer to the real thing with fundamental gameplay advances and a new season of innovation across every mode.\n\nWhat is FIFA?\n\nPlay The World’s Game with 17,000+ players, over 700 teams in 90+ stadiums and more than 30 leagues from all over the globe.",
+  "steamid": 1506830
+},{
+  "_id": {
+    "$oid": "639a0a1815b840ea48ee87a8"
+  },
+  "id_": 1,
+  "name": "Call Of Duty Modern Warfare 2",
+  "image": "https://res.cloudinary.com/dhujezr6s/image/upload/v1671120453/mw2_2_joimgo.jpg",
+  "price": 60.99,
+  "desc_long": "Drops players into an unprecedented global conflict that features the return of the iconic Operators of Task Force 141. Call of Duty®: Modern Warfare® II drops players into an unprecedented global conflict that features the return of the iconic Operators of Task Force 141. From small-scale, high-stakes infiltration tactical ops to highly classified missions, players will deploy alongside friends in a truly immersive experience.....",
+  "desc_brief": "Infinity Ward brings fans state-of-the-art gameplay, with all-new gun handling, advanced AI system, a new Gunsmith and a suite of other gameplay and graphical innovations that elevate the franchise to new heights.",
+  "steamid": 1938090
+}]
